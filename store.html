@@ -345,16 +345,18 @@
           items.push({ 'name': item['playername'], 'PlaceImgUrl': String(item['photo']), 'country': item['teamname'], 'price': card_price })
         }
         console.log(items);
-        $('.button').click(function () {
-          console.log('click goumai');
 
+        $(document).ready(function () {
+          $('.button').click(function(d){
+            console.log(111)
+          })
+        });
 
-
-        })
 
       }
     });
   }
+
   foreach_sale_card()
 
   console.log(items)
@@ -364,6 +366,8 @@
       items: items
     }
   })
+
+
   function buy_card(card_id, card_price) {
     var to = dappAddress;
     var value = String(card_price);
@@ -372,10 +376,7 @@
     nebPay.call(to, value, callFunction, callArgs);
 
   }
-  $(document).ready(function () {
-
-  });
-
+  
 
 
 

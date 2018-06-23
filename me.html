@@ -11,6 +11,12 @@
     <script type="text/javascript" src="./dist/nebulas.js"></script>
     <script type="text/javascript" src="./js/playdata.js"></script>
 
+    <script type="text/javascript" src="./js/bootpopup.min.js"></script>
+
+
+
+
+
     <script type="text/javascript" src="./dist/nebPay.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
@@ -106,6 +112,7 @@
       } 
       
       .country{
+        border:1px solid #F7E65E;
         height:40px;
         width: 100%;
         cursor: pointer;
@@ -224,7 +231,7 @@
     
 </body>
 <script type="text/javascript">
-  console.log(awsomedata)
+    //console.log(awsomedata)
     var data = awsomedata
     "use strict";
 
@@ -294,7 +301,7 @@
         user_cardids.forEach(function(d, i){
           //console.log(i)
           d=parseInt(d.replace('"', ''))
-          console.log(d)
+          //console.log(d)
           if(i%2==0){
             if(d){
               var item=awsomedata[d]
@@ -324,7 +331,7 @@
         items=[]
         console.log(countryDict)
         for(var country in countryDict){
-          console.log(country)
+          //console.log(country)
           var record=[]
           for(var name in countryDict[country]){
             record.push(countryDict[country][name])
@@ -337,7 +344,7 @@
         items.forEach(function(item){
             html+="<div id='guojia1' class='guojia'><div class='card-items'><div class='country'>"+item.country+"<div class='duijiang' id="+item.country+"></div></div><div class='country-detail'>"
             item['card'].forEach(function(d){
-              console.log(d.PlaceImgUrl)
+              //console.log(d.PlaceImgUrl)
               d.id=idbase;
               idbase+=1;
               html+=  "<div  class='items'><div class='picture' style='background-image: url("+d.PlaceImgUrl+");background-repeat: no=repeat; background-size: 100%;'></div><div class='name'><svg style='width: 100%;height: 100%'><text x='55' y='15' fill='white' text-anchor='middle'>"+d.name+"</text><text x='105' y='15' fill='white' text-anchor='end'>X"+d.number+"</text></svg></div><div class='button' id="+d.id+" ></div></div>"
@@ -346,7 +353,17 @@
         })
         
         $('#container2').html(html)
-        console.log(html)
+
+        $('.button').click(function(d){
+          console.log('ewqe')
+          var str=prompt("请输入卖出价格"); 
+          while(true){
+            if(!str){
+              str=prompt("请重新输入价格"); 
+            } else break
+          }
+        })
+
 
 				
 			}
@@ -359,77 +376,16 @@
     var countrys = [];
     var card
 
-    // console.log(items1)
-    // new Vue({
-    //   el: '#guojia1',
-    //   data: {
-    //     items1: items1
-    //   }
-    // })
+    
+    function sale_card(card_id,card_price){
+      var to = dappAddress;
+      var value = "0";
+      var callFunction = "sale_my_card";
+      var card_id = id;
+      var callArgs ="[\""+cardid+"\",\""+card_price+"\"]";
+      nebPay.call(to, value, callFunction, callArgs);
+    }
 
-    // // console.log(items2)
-    // new Vue({
-    //   el: '#guojia2',
-    //   data: {
-    //     items2: items2
-    //   }
-    // })
-
-    // new Vue({
-    //   el: '#container2',
-    //   data: {
-    //     items: [
-    //       { country: 'Runoob1213' },
-    //       { country: 'Google' },
-    //       { country: 'Taobao' }
-    //     ]
-    //   }
-    // })
-
-    // new Vue({
-    //   el: '#guojia2',
-    //   data: {
-    //     items2: [
-    //       { country: 'Runoob' },
-    //       { country: 'Google' },
-    //       { country: 'Taobao' }
-    //     ]
-    //   }
-    // })
-      function sale_card(card_id,card_price){
-        var to = dappAddress;
-        var value = "0";
-        var callFunction = "sale_my_card";
-        var card_id = id;
-        var callArgs ="[\""+cardid+"\",\""+card_price+"\"]";
-        nebPay.call(to, value, callFunction, callArgs);
-      }
-
-     $(document).ready(function (){
-        $('.button').click(function(){
-            console.log('click chushou')
-            console.log($(this).attr("id"))
-
-            $("body").dialog({
-                    autoOpen: false,
-                    bgiframe: true,
-                    height: 600,
-                    width:500,
-                    modal: true,
-                    resizable:true
-                    });
-                     
-            
-
-            //alert(22)
-        })
-    });
-    // $(document).ready(function (){
-    //     $('.country').click(function(){
-    //         console.log('click duihuan')
-    //         alert(11)
-    //     })
-    // });
 
     
 
