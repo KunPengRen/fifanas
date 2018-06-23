@@ -244,6 +244,8 @@
 </body>
 <script type="text/javascript">
     //console.log(awsomedata)
+
+    var keyposition={"24": "2", "25": "3", "26": "4", "27": "5", "20": "9", "21": "10", "22": "11", "23": "1", "28": "6", "29": "7", "4": "4", "8": "8", "59": "4", "58": "3", "55": "11", "54": "10", "57": "2", "56": "1", "51": "7", "50": "6", "53": "9", "52": "8", "88": "11", "82": "5", "83": "6", "80": "3", "81": "4", "86": "9", "87": "10", "84": "7", "85": "8", "3": "3", "7": "7", "39": "6", "38": "5", "33": "11", "32": "10", "31": "9", "30": "8", "37": "4", "36": "3", "35": "2", "34": "1", "60": "5", "61": "6", "62": "7", "63": "8", "64": "9", "65": "10", "66": "11", "67": "1", "68": "2", "69": "3", "2": "2", "6": "6", "11": "11", "10": "10", "13": "2", "12": "1", "15": "4", "14": "3", "17": "6", "16": "5", "19": "8", "18": "7", "48": "4", "49": "5", "46": "2", "47": "3", "44": "11", "45": "1", "42": "9", "43": "10", "40": "7", "41": "8", "1": "1", "5": "5", "9": "9", "77": "11", "76": "10", "75": "9", "74": "8", "73": "7", "72": "6", "71": "5", "70": "4", "79": "2", "78": "1"}
     var data = awsomedata
     "use strict";
 
@@ -358,7 +360,7 @@
               html+="<div id='guojia1' class='guojia'><div class='card-items'><div class='country'>"+item.country+"<div class='duijiang' id="+item.country+" team_id="+item['card'][0].teamid+"></div></div><div class='country-detail'>"
             }
             else{
-              html+="<div id='guojia1' class='guojia'><div class='card-items'><div class='country'>"+item.country+"<div class='duijiang' id="+item.country+" team_id="+item['card'][0].teamid+"></div></div><div class='country-detail'>"
+              html+="<div id='guojia1' class='guojia'><div class='card-items'><div class='country'>"+item.country+"<div class='duijiangmiss' id="+item.country+" team_id="+item['card'][0].teamid+"></div></div><div class='country-detail'>"
             }
 
             item['card'].forEach(function(d){
@@ -372,13 +374,23 @@
             html+="</div></div>"
         })
         $('#container2').html(html)
+
+        var duihuan=['', '','','','', '','','','', '','']
+
         $('.duijiang').click(function(d){
-          console.log($(this).attr('team_id'))
+          var team_id = $(this).attr('team_id')
           var country =  $(this).attr('id')
           for(var item in countryDict[country]){
             console.log(item)
+            console.log(keyposition[countryDict[country][item]['key']])
+            duihuan[keyposition[countryDict[country][item]['key']]-1]=String(keyid[countryDict[country][item]['key']][0])
           }
+          duihuan.push(team_id)
+          duihuan = JSON.stringify(duihuan)
+          console.log(duihuan)
         })
+
+        
 
         $('.button').click(function(d){
           var price=prompt("请输入卖出价格")
