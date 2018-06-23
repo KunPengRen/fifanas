@@ -385,7 +385,10 @@
           var id = $(this).attr('id')
           //$('this').attr('id')
           while(true){
-            if(isNaN(parseFloat(price))){
+            if(price==null){
+              break;
+            }
+            else if(isNaN(parseFloat(price))){
               price=prompt("卖出价格格式不合法， 请重新输入价格")
             }
             else{
