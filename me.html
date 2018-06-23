@@ -270,7 +270,7 @@
   console.log(awsomedata)
     var data = awsomedata
     "use strict";
-    var dappAddress = "n1kJYyF8uAUUJpkHNUcbErKBRk9V6yG76K3";
+    var dappAddress = "n1tvXEyYCMtQeNPpkL2CCUknHK3mPEAzEw7";
     var nebulas = require("nebulas"), Account = Account, neb = new nebulas.Neb();
     neb.setRequest(new nebulas.HttpRequest("https://testnet.nebulas.io"))
 
@@ -328,6 +328,57 @@
         var resultObj = JSON.parse(result);
         user_cardids = resultObj['card_list'].split('_');
         alert(user_cardids);
+
+        items=[]
+
+        countryDict={}
+        user_cardids.forEach(function(d){
+          if(d){
+            var item=awsomedata[d]['teamname']
+            if(!countryDict[item['teamname']])
+              countryDict[item['teamname']]={}
+
+            if(!countryDict[item['teamname']][item['playername']])
+              countryDict[item['teamname']][item['playername']]={'name': item['playername'], 'PlaceImgUrl': String(item['d.photo']), 'number': 0}
+
+            countryDict[item['teamname']][item['playername']]['number']+=1
+      
+
+
+          }
+        })
+        console.log(countryDict)
+        
+
+
+
+        var items=[{'country': '丹麦', 'card': []},{'country': '法国', 'card': []}]
+        data['4476'].forEach(function(d){
+          items[0]['card'].push({'name': d.playername, 'PlaceImgUrl': String(d.photo), 'number': 2})
+        })
+
+        // var items2=[{'country': '法国', 'card': []}]
+        data['4481'].forEach(function(d){
+          items[1]['card'].push({'name': d.playername, 'PlaceImgUrl': String(d.photo), 'number': 2})
+        })
+        var html="";
+        
+        var idbase = 1;
+        
+        items.forEach(function(item){
+            html+="<div id='guojia1' class='guojia'><div class='card-items'><div class='country'>"+item.country+"</div><div class='country-detail'>"
+            item['card'].forEach(function(d){
+              console.log(d.PlaceImgUrl)
+              d.id=idbase;
+              idbase+=1;
+              html+=  "<div  class='items'><div class='picture' style='background-image: url("+d.PlaceImgUrl+");background-repeat: no=repeat; background-size: 100%;'></div><div class='name'><svg style='width: 100%;height: 100%'><text x='55' y='15' fill='white' text-anchor='middle'>"+d.name+"</text><text x='105' y='15' fill='white' text-anchor='end'>X"+d.number+"</text></svg></div><div class='button' id="+d.id+" ></div></div>"
+            })
+            html+="</div></div>"
+        })
+        
+        $('#container2').html(html)
+        console.log(html)
+        
 				
 			}
     }
@@ -339,33 +390,7 @@
     var countrys = [];
     var card
     
-    /*
-    var items=[{'country': '丹麦', 'card': []},{'country': '法国', 'card': []}]
-    data['4476'].forEach(function(d){
-      items[0]['card'].push({'name': d.playername, 'PlaceImgUrl': String(d.photo), 'number': 2})
-    })
-
-    // var items2=[{'country': '法国', 'card': []}]
-    data['4481'].forEach(function(d){
-      items[1]['card'].push({'name': d.playername, 'PlaceImgUrl': String(d.photo), 'number': 2})
-    })
-    var html="";
     
-    var idbase = 1;
-   
-    items.forEach(function(item){
-        html+="<div id='guojia1' class='guojia'><div class='card-items'><div class='country'>"+item.country+"</div><div class='country-detail'>"
-        item['card'].forEach(function(d){
-          console.log(d.PlaceImgUrl)
-          d.id=idbase;
-          idbase+=1;
-          html+=  "<div  class='items'><div class='picture' style='background-image: url("+d.PlaceImgUrl+");background-repeat: no=repeat; background-size: 100%;'></div><div class='name'><svg style='width: 100%;height: 100%'><text x='55' y='15' fill='white' text-anchor='middle'>"+d.name+"</text><text x='105' y='15' fill='white' text-anchor='end'>X"+d.number+"</text></svg></div><div class='button' id="+d.id+" ></div></div>"
-        })
-        html+="</div></div>"
-    })
-   */
-    $('#container2').html(html)
-    console.log(html)
     
 
     // console.log(items1)
