@@ -141,6 +141,16 @@
         
         float: left;
       }
+      .guoqi{
+        left:0px;
+        height:100%;
+        width: 100px;
+        cursor: pointer;
+        
+        background-size: 70%;
+        float: left;
+
+      }
       .duijiang{
         left:800px;
         height:100%;
@@ -379,10 +389,10 @@
         var idbase = 1;
         items.forEach(function(item){
             if(item['card'].length==11){
-              html+="<div id='guojia1' class='guojia'><div class='card-items'><div class='country'>"+item.country+"<div class='duijiang' id="+item.country+" team_id="+item['card'][0].teamid+"></div></div><div class='country-detail'>"
+              html+="<div id='guojia1' class='guojia'><div class='card-items'><div class='country'>"+item.country+"<div class='guoqi' style='background-image: url(images/"+item.country+".png);background-repeat: no-repeat; background-size: 40%;'></div><div class='duijiang' id="+item.country+" team_id="+item['card'][0].teamid+"></div></div><div class='country-detail'>"
             }
             else{
-              html+="<div id='guojia1' class='guojia'><div class='card-items'><div class='country'>"+item.country+"<div class='duijiangmiss' id="+item.country+" team_id="+item['card'][0].teamid+"></div></div><div class='country-detail'>"
+              html+="<div id='guojia1' class='guojia'><div class='card-items'><div class='country'>"+item.country+"<div class='guoqi' style='background-image: url(images/"+item.country+".png);background-repeat: no-repeat; background-size: 40%;'></div><div class='duijiangmiss' id="+item.country+" team_id="+item['card'][0].teamid+"></div></div><div class='country-detail'>"
             }
 
             item['card'].forEach(function(d){
