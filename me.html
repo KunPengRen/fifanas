@@ -355,16 +355,17 @@
         $('#container2').html(html)
 
         $('.button').click(function(d){
-          console.log('ewqe')
-          var str=prompt("请输入卖出价格"); 
+          var str=prompt("请输入卖出价格")
           while(true){
-            if(!str){
-              str=prompt("请重新输入价格"); 
-            } else break
+            if(isNaN(parseFloat(str))){
+              str=prompt("卖出价格格式不合法， 请重新输入价格")
+            }
+            else{
+              console.log(str)
+              break
+            }
           }
         })
-
-
 				
 			}
     }
