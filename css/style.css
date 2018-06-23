@@ -2,6 +2,13 @@
 	background:#000;
 }*/
 
+#timeCount{
+        position: absolute;
+        top:0;
+        right: 100px;
+        height: 80px;
+      }
+      
 /*.menu li.active a{
 	color:#F7E65E;
 	border:5px solid black;	

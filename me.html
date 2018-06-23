@@ -12,7 +12,7 @@
     <script type="text/javascript" src="./js/playdata.js"></script>
 
     <script type="text/javascript" src="./js/bootpopup.min.js"></script>
-
+    <script type="text/javascript" src="./js/time.js"></script>
 
 
 
@@ -239,6 +239,9 @@
 </script>
 <body>
     <div id="top">
+      <div id='timeCount'>
+         
+        </div>
         <!--container-->
         <div class="container">
             <div class="top-header">
@@ -422,7 +425,24 @@
           console.log(duihuan)
         })
 
+        //setTimeout("alert('数据请求倒计时： 15s')",100);
+
+        // var counter = 10; var timerId;
+
         
+
+        // function ShowAlert() {
+        //     if (counter != 0) {
+        //         alert(counter);
+        //         counter = counter - 1;
+        //     }
+        //     else {
+        //         clearInterval(timerId);
+        //     }
+        // }
+        
+        // timerId = setInterval("ShowAlert()", 1000);
+
 
         $('.button').click(function(d){
           var price=prompt("请输入卖出价格")
