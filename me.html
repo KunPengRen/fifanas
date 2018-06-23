@@ -253,6 +253,7 @@
                         <li ><a href="./index.html">首页</a></li>
                         <li class="active"><a href="./me.html">我的卡片</a></li>
                         <li><a href="./store.html">商店</a></li>
+                         <li><a href="./plays.html">球星图鉴</a></li>
                     </ul>
                     
                 </div>
@@ -284,7 +285,8 @@
     var data = awsomedata
     teamlistdic = {"4704" : 1,'4698':3,'4481':7,'4819':6,'4748':4,'4711':5,'4694':2,'4717':8}
     "use strict";
-
+    //测试网
+    //var dappAddress ="n1ikVyaoedyYsVH8UiyboY9SFm51wCmoX57"
     var dappAddress = "n1zAsr4qbFEYU27m6ABcwUAtM2TwD6sXQTN";
     var nebulas = require("nebulas"), Account = Account, neb = new nebulas.Neb();
     //neb.setRequest(new nebulas.HttpRequest("https://testnet.nebulas.io"))
@@ -425,6 +427,7 @@
           duihuan.push(team_id1)
           duihuan = JSON.stringify(duihuan)
           get_duihuan(duihuan);
+          
           console.log(duihuan)
         })
 
@@ -472,7 +475,15 @@
       var to = dappAddress;
       var value = "0";
       var callFunction = "conversion";
-      nebPay.call(to, value, callFunction, callArgs);
+      nebPay.call(to, value, callFunction, callArgs,{
+      listener:function(){
+        alert("正在进行区块打包交易,请耐心等待20秒后自动跳转到刷新");
+      setTimeout(function(){
+          
+          self.location="me.html";
+        },20000)
+      }
+    });
     }
     getWallectInfo();
     userlogin(1);   
@@ -485,7 +496,16 @@
       var value = "0";
       var callFunction = "sale_my_card";
       var callArgs ="[\""+card_id+"\",\""+card_price+"\"]";
-      nebPay.call(to, value, callFunction, callArgs);
+      nebPay.call(to, value, callFunction, callArgs,{
+      listener:function(){
+        alert("正在进行区块打包交易,请耐心等待20秒后自动刷新");
+      setTimeout(function(){
+          
+          self.location="me.html";
+        },20000)
+      }
+    });
+    
     }
 
 
