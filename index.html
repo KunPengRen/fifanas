@@ -216,7 +216,7 @@ timedCount()
                 <div id="card-top">
                 </div>
                 <div id="card-price">
-                
+                    0.05 NAS/张
                 </div>
                 <!-- <div id="card-bottom">
                 </div> -->
@@ -258,24 +258,26 @@ timedCount()
   var nebPay = new NebPay();
   //本地钱包地址
   var localAddress;
-  var card_price;
+  var card_price=0.05;
 
-  function get_card_price(){
-    //
-      var to = dappAddress;
-			var value = "0";
-			var callFunction = "get_common_card_price";
-      var callArgs ="["+"]";
+  // function get_card_price(){
+  //   //
+  //     var to = dappAddress;
+		// 	var value = "0";
+		// 	var callFunction = "get_common_card_price";
+  //     var callArgs ="["+"]";
      
-      nebPay.simulateCall(to, value, callFunction, callArgs, {
-            listener:  function(resp){
-            var result = resp.result;
-            card_price =parseFloat(result);
-            $('#card-price').text(card_price+" NAS/张")
-            console.log(card_price)
-      }});
-  }
-  get_card_price();
+  //     nebPay.simulateCall(to, value, callFunction, callArgs, {
+  //           listener:  function(resp){
+  //           var result = resp.result;
+  //           card_price =parseFloat(result);
+
+  //           console.log('card_price:', card_price)
+  //           $('#card-price').text(card_price+" NAS/张")
+  //           console.log(card_price)
+  //     }});
+  // }
+  // get_card_price();
   function userlogin(i){
       //用户登录
       var to = dappAddress;
