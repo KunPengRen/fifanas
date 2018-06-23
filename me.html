@@ -109,10 +109,20 @@
         height:40px;
         width: 100%;
         cursor: pointer;
-        background:url(images/check.png) no-repeat bottom;
-        background-size: 7%;
+        /*background:url(images/check.png) no-repeat bottom;
+        background-size: 7%;*/
         
         float: left;
+      }
+      .duijiang{
+        left:800px;
+        height:100%;
+        width: 100px;
+        cursor: pointer;
+        background:url(images/check.png) no-repeat bottom;
+        background-size: 70%;
+        float: right;
+
       }
       .country-detail{
         height:auto;
@@ -150,6 +160,8 @@
         background-size: 70%;
         cursor: pointer;
       }
+
+
 
       #card-price{
         position: absolute;
@@ -199,66 +211,11 @@
     </div>
     <div id="buttom">
         <div id="container">
-            <div id="container1">
-              
+            <div id="container1">   
             </div>
             <div id="container2">
-
-              <div id="app">
-                <ol>
-                  <li v-for="site in sites">
-                    {{ site.country }}
-                  </li>
-                  
-                </ol>
-              </div>
-
-              <div id="app1">
-                <ol>
-                  <li v-for="site in items">
-                    {{ site.country }}
-                  </li>
-                </ol>
-              </div>
-
-             <!--  <div id='guojia1' class="guojia">
-                <div class="card-items" v-for="record in items">
-                  <div class="country">
-                    {{ record.country }}
-                  </div>
-                  <div class="country-detail">
-                    <div v-for="item in record.card" class="items">
-                      <div class="picture" v-bind:style="{ 'background-image': 'url(' + item.PlaceImgUrl + ')','background-repeat':'no-repeat','background-size':'cover' }">
-                      </div>
-                      <div class="name">
-                        <svg style="width: 100%;height: 100%">
-                          <text x="55" y="15" fill="white" text-anchor="middle">{{ item.name }}</text>
-                          <text x="105" y="15" fill="white" text-anchor="end">X{{ item.number }}</text>
-                        </svg>
-                      </div>
-                      <div class="button">
-                      </div>
-                    </div>
-                  </div>
-              </div> -->
-
-              
-               
-
-              </div>
-              
-              <!-- <div id="card">
-                <div id="card-top">
-                </div>
-                <div id="card-price">
-                  0.173 NAS/张
-                </div>
-                <div id="card-bottom">
-                </div>
-              </div> -->
             </div>
             <div id="container3">
-              
             </div>
         </div>
     </div>
@@ -270,7 +227,7 @@
   console.log(awsomedata)
     var data = awsomedata
     "use strict";
-    var dappAddress = "n1tvXEyYCMtQeNPpkL2CCUknHK3mPEAzEw7";
+    var dappAddress = "n1qc8tL8rKLCuarrSEJAivUG3Z4kpp5xdWa";
     var nebulas = require("nebulas"), Account = Account, neb = new nebulas.Neb();
     neb.setRequest(new nebulas.HttpRequest("https://testnet.nebulas.io"))
 
@@ -315,7 +272,6 @@
     }
     function get_user_cards(user_cardids){
       
-
     }
     function loginlisten(resp){
        result = resp.result
@@ -325,48 +281,59 @@
         
 			} else {
 				$('#tableList').show();
-        var resultObj = JSON.parse(result);
-        user_cardids = resultObj['card_list'].split('_');
-        alert(user_cardids);
+        user_cardids = result.split('_');
+        console.log(user_cardids)
+        var items=[]  
+        var countryDict={}
 
-        items=[]
+        var key=[]
+        var id= []
+        var keyid={} 
+        user_cardids.forEach(function(d, i){
+          //console.log(i)
+          d=parseInt(d.replace('"', ''))
+          console.log(d)
+          if(i%2==0){
+            if(d){
+              var item=awsomedata[d]
+              if(!countryDict[item['teamname']])
+                countryDict[item['teamname']]={}
 
-        countryDict={}
-        user_cardids.forEach(function(d){
-          if(d){
-            var item=awsomedata[d]['teamname']
-            if(!countryDict[item['teamname']])
-              countryDict[item['teamname']]={}
+              if(!countryDict[item['teamname']][item['playername']])
+                countryDict[item['teamname']][item['playername']]={'name': item['playername'], 'PlaceImgUrl': String(item['photo']), 'number': 0}
 
-            if(!countryDict[item['teamname']][item['playername']])
-              countryDict[item['teamname']][item['playername']]={'name': item['playername'], 'PlaceImgUrl': String(item['d.photo']), 'number': 0}
-
-            countryDict[item['teamname']][item['playername']]['number']+=1
-      
-
-
+              countryDict[item['teamname']][item['playername']]['number']+=1
+            }
+            key.push(d)
+          }
+          else{
+            id.push(d)
           }
         })
+
+        for(var i=0;i<key.length;i++){
+          if(!keyid[key[i]]) keyid[key[i]]=[]
+
+          keyid[key[i]].push(id[i]);
+        }
+
+        console.log(keyid)
+
+        items=[]
         console.log(countryDict)
-        
-
-
-
-        var items=[{'country': '丹麦', 'card': []},{'country': '法国', 'card': []}]
-        data['4476'].forEach(function(d){
-          items[0]['card'].push({'name': d.playername, 'PlaceImgUrl': String(d.photo), 'number': 2})
-        })
-
-        // var items2=[{'country': '法国', 'card': []}]
-        data['4481'].forEach(function(d){
-          items[1]['card'].push({'name': d.playername, 'PlaceImgUrl': String(d.photo), 'number': 2})
-        })
+        for(var country in countryDict){
+          console.log(country)
+          var record=[]
+          for(var name in countryDict[country]){
+            record.push(countryDict[country][name])
+          }
+          items.push({'country': country, 'card': record})
+        }
         var html="";
         
         var idbase = 1;
-        
         items.forEach(function(item){
-            html+="<div id='guojia1' class='guojia'><div class='card-items'><div class='country'>"+item.country+"</div><div class='country-detail'>"
+            html+="<div id='guojia1' class='guojia'><div class='card-items'><div class='country'>"+item.country+"<div class='duijiang' id="+item.country+"></div></div><div class='country-detail'>"
             item['card'].forEach(function(d){
               console.log(d.PlaceImgUrl)
               d.id=idbase;
@@ -389,9 +356,6 @@
     userlogin(1);
     var countrys = [];
     var card
-    
-    
-    
 
     // console.log(items1)
     // new Vue({
@@ -436,6 +400,17 @@
         $('.button').click(function(){
             console.log('click chushou')
             console.log($(this).attr("id"))
+
+            $("body").dialog({
+                    autoOpen: false,
+                    bgiframe: true,
+                    height: 600,
+                    width:500,
+                    modal: true,
+                    resizable:true
+                    });
+                     
+            
 
             //alert(22)
         })
