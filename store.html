@@ -276,7 +276,7 @@
 
             </svg>
           </div>
-          <div class="button">
+          <div class="button" :id="(item.id)">
 
           </div>
         </div>
@@ -308,7 +308,7 @@
   // })
   var data = awsomedata;
   "use strict";
-  var dappAddress = "n1qc8tL8rKLCuarrSEJAivUG3Z4kpp5xdWa";
+  var dappAddress = "n1qoNq95ME3P1PhMenUkQjigCQBbKA2531f";
   var nebulas = require("nebulas"), Account = Account, neb = new nebulas.Neb();
   neb.setRequest(new nebulas.HttpRequest("https://testnet.nebulas.io"))
 
@@ -342,14 +342,27 @@
           let team_player_id = more_data[3]
           let status = more_data[4]
           var item = awsomedata[card_type]
-          items.push({ 'name': item['playername'], 'PlaceImgUrl': String(item['photo']), 'country': item['teamname'], 'price': card_price })
+          items.push({ 'name': item['playername'], 'PlaceImgUrl': String(item['photo']), 'country': item['teamname'], 'card_price': card_price,'id':i ,'card_id':card_id})
         }
         console.log(items);
-       
+
+
+        $(document).ready(function () {
+          $('.button').click(function(d){
+            num = $(this).attr("id")
+
+           let card_id= items[num]["card_id"];
+           let card_price= items[num]['card_price'];
+           buy_card(card_id,card_price);
+          })
+        });
+
+
 
       }
     });
   }
+
   foreach_sale_card()
 
   console.log(items)
@@ -359,18 +372,17 @@
       items: items
     }
   })
+
+
   function buy_card(card_id, card_price) {
     var to = dappAddress;
     var value = String(card_price);
     var callFunction = "get_sale_card";
-    var callArgs = "[\"" + cardid + "\"]";
+    var callArgs = "[\"" + card_id + "\"]";
     nebPay.call(to, value, callFunction, callArgs);
 
   }
-  $(document).ready(function () {
-
-  });
-
+  
 
 
 
