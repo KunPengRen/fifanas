@@ -131,6 +131,18 @@
         float: right;
 
       }
+
+      .duijiangmiss{
+        left:800px;
+        height:100%;
+        width: 100px;
+        cursor: pointer;
+        background:url(images/checkmiss.png) no-repeat bottom;
+        background-size: 70%;
+        float: right;
+
+      }
+
       .country-detail{
         height:auto;
         width: 100%;
@@ -309,7 +321,7 @@
                 countryDict[item['teamname']]={}
 
               if(!countryDict[item['teamname']][item['playername']])
-                countryDict[item['teamname']][item['playername']]={'name': item['playername'], 'PlaceImgUrl': String(item['photo']), 'number': 0}
+                countryDict[item['teamname']][item['playername']]={'name': item['playername'], 'PlaceImgUrl': String(item['photo']), 'number': 0, 'key': d, 'teamid': item['team_id']}
 
               countryDict[item['teamname']][item['playername']]['number']+=1
             }
@@ -342,32 +354,50 @@
         
         var idbase = 1;
         items.forEach(function(item){
-            html+="<div id='guojia1' class='guojia'><div class='card-items'><div class='country'>"+item.country+"<div class='duijiang' id="+item.country+"></div></div><div class='country-detail'>"
+            if(item['card'].length==11){
+              html+="<div id='guojia1' class='guojia'><div class='card-items'><div class='country'>"+item.country+"<div class='duijiang' id="+item.country+" team_id="+item['card'][0].teamid+"></div></div><div class='country-detail'>"
+            }
+            else{
+              html+="<div id='guojia1' class='guojia'><div class='card-items'><div class='country'>"+item.country+"<div class='duijiang' id="+item.country+" team_id="+item['card'][0].teamid+"></div></div><div class='country-detail'>"
+            }
+
             item['card'].forEach(function(d){
               //console.log(d.PlaceImgUrl)
+              console.log(d)
+
               d.id=idbase;
               idbase+=1;
-              html+=  "<div  class='items'><div class='picture' style='background-image: url("+d.PlaceImgUrl+");background-repeat: no=repeat; background-size: 100%;'></div><div class='name'><svg style='width: 100%;height: 100%'><text x='55' y='15' fill='white' text-anchor='middle'>"+d.name+"</text><text x='105' y='15' fill='white' text-anchor='end'>X"+d.number+"</text></svg></div><div class='button' id="+d.id+" ></div></div>"
+              html+=  "<div  class='items'><div class='picture' style='background-image: url("+d.PlaceImgUrl+");background-repeat: no=repeat; background-size: 100%;'></div><div class='name'><svg style='width: 100%;height: 100%'><text x='55' y='15' fill='white' text-anchor='middle'>"+d.name+"</text><text x='105' y='15' fill='white' text-anchor='end'>X"+d.number+"</text></svg></div><div class='button' id="+d.key+" ></div></div>"
             })
             html+="</div></div>"
         })
-        
         $('#container2').html(html)
-
-        $('.button').click(function(d){
-          console.log('ewqe')
-          var str=prompt("请输入卖出价格"); 
-          while(true){
-            if(!str){
-              str=prompt("请重新输入价格"); 
-            } else break
+        $('.duijiang').click(function(d){
+          console.log($(this).attr('team_id'))
+          var country =  $(this).attr('id')
+          for(var item in countryDict[country]){
+            console.log(item)
           }
         })
 
-
+        $('.button').click(function(d){
+          var price=prompt("请输入卖出价格")
+          var id = $(this).attr('id')
+          //$('this').attr('id')
+          while(true){
+            if(isNaN(parseFloat(price))){
+              price=prompt("卖出价格格式不合法， 请重新输入价格")
+            }
+            else{
+              sale_card(keyid[id][0], price)
+              break
+            }
+          }
+        })
 				
 			}
     }
+
     function get_user_player(){
       //获取用户信息
     }
@@ -381,8 +411,7 @@
       var to = dappAddress;
       var value = "0";
       var callFunction = "sale_my_card";
-      var card_id = id;
-      var callArgs ="[\""+cardid+"\",\""+card_price+"\"]";
+      var callArgs ="[\""+card_id+"\",\""+card_price+"\"]";
       nebPay.call(to, value, callFunction, callArgs);
     }
 
