@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>World Cup 2018</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="css/style.css" rel='stylesheet' type='text/css' />
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="js/d3.v4.min.js"></script>
+    <script type="text/javascript" src="./dist/nebulas.js"></script>
+    <script type="text/javascript" src="./js/playdata.js"></script>
+
+    <script type="text/javascript" src="./js/bootpopup.min.js"></script>
+    <script type="text/javascript" src="./js/time.js"></script>
+
+
+
+
+    <script type="text/javascript" src="./dist/nebPay.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <style type="text/css">
+        body {
+            background-image: url(images/background.jpg);
+            background-repeat: repeat-y;
+            background-size: 100%;
+            color: white;
+            height: 200%
+        }
+
+        /*li{
+        
+      } */
+
+        .active a {
+            border: 4px solid #F7E65E !important
+        }
+
+        #top {
+            position: absolute;
+            top: 0;
+            left: 0px;
+            height: 80px;
+            width: 100%;
+            /* background: blue;*/
+        }
+
+        #buttom {
+            position: absolute;
+            top: 80px;
+            left: 0px;
+            height: calc(100% - 80px);
+            width: 100%;
+            /*background: red;*/
+        }
+
+        #container {
+            position: absolute;
+            top: 0px;
+            left: 5%;
+            height: 100%;
+            width: 90%;
+
+            opacity: 0.8;
+            z-index: 100;
+            /*background: linear-gradient(#F7E65E,#89540d60);
+        /*background: #F0D779;*/
+            /*opacity: 0.7;*/
+            /*      */
+        }
+
+        #container1 {
+            position: absolute;
+            top: 0px;
+            left: 0;
+            height: 80px;
+            width: 100%;
+            background: url(images/card_profile_top.png) no-repeat;
+            background-size: 100%;
+            float: left;
+
+        }
+
+        #container2 {
+            position: absolute;
+            top: 80px;
+            left: 0;
+            height: auto;
+
+            background: url(images/card_profile.png) repeat-y;
+            background-size: 100%;
+
+            width: 100%;
+            z-index: 100;
+            float: left;
+
+            /*background: red;*/
+            /*top,url(images/card_profile_end.png) no-repeat bottom,*/
+        }
+
+        #maincontainer {
+
+            top: 0px;
+            left: 20px;
+            height: auto;
+            border-right: 2px solid #F7E65E;
+            margin-left: 20px;
+            margin-right: 20px;
+
+            width: calc(100% - 40px);
+            ;
+
+            float: left;
+
+            /*background: red;*/
+            /*top,url(images/card_profile_end.png) no-repeat bottom,*/
+        }
+
+        .guojia {
+            height: auto;
+            width: 100%;
+            float: left;
+        }
+
+        #container3 {
+            position: absolute;
+            bottom: 0px;
+            width: 100%;
+            float: left;
+            left: 0px;
+            height: 40px;
+            /* background:url(images/card_profile_end.png) no-repeat bottom;*/
+            background-size: 100%;
+
+        }
+
+        .country {
+            border-top: 2px solid #F7E65E;
+            border-left: 2px solid #F7E65E;
+            border-bottom: 1px solid #F7E65E;
+            height: 40px;
+            width: 100%;
+            cursor: pointer;
+            /*background:url(images/check.png) no-repeat bottom;
+        background-size: 7%;*/
+            float: left;
+        }
+
+        .guoqi {
+            left: 0px;
+            height: 100%;
+            width: 100px;
+            cursor: pointer;
+
+            background-size: 70%;
+            float: left;
+
+        }
+
+        .duijiang {
+            left: 800px;
+            height: 100%;
+            width: 100px;
+            cursor: pointer;
+            background: url(images/check.png) no-repeat bottom;
+            background-size: 70%;
+            float: right;
+
+        }
+
+        .duijiangmiss {
+            left: 800px;
+            height: 100%;
+            width: 100px;
+            cursor: pointer;
+            background: url(images/checkmiss.png) no-repeat bottom;
+            background-size: 70%;
+            float: right;
+
+        }
+
+        .country-detail {
+            height: auto;
+            width: 100%;
+            float: left;
+        }
+
+        .card-items {
+            width: 100%;
+            height: auto;
+            float: left;
+        }
+
+        .items {
+            height: 160px;
+            width: 110px;
+            /*display:inline*/
+            float: left;
+            border: 1px solid #F7E65E;
+        }
+
+        .picture {
+            height: 110px;
+            width: 110px;
+        }
+
+        .name {
+            height: 20px;
+            width: 110px;
+            font-size: 8px;
+            text-align: center;
+            /*水平居中*/
+            line-height: 20px;
+            /*行距设为与div高度一致*/
+        }
+
+        .button {
+            height: 30px;
+            width: 110px;
+            background: url(images/sale.png) no-repeat bottom;
+            background-size: 70%;
+            cursor: pointer;
+        }
+
+
+
+        #card-price {
+            position: absolute;
+            top: 200px;
+            left: 0;
+            height: 20px;
+            width: 100%;
+            text-align: center;
+            /*水平居中*/
+            line-height: 20px;
+            /*行距设为与div高度一致*/
+        }
+
+        #card-bottom {
+            position: absolute;
+            top: 230px;
+            left: 0;
+            height: 50px;
+            width: 100%;
+            background: url(images/btn.png) no-repeat bottom;
+            background-size: 80%;
+        }
+    </style>
+</head>
+<script>
+
+</script>
+
+<body>
+    <div id="top">
+        <div id='timeCount'>
+
+        </div>
+        <!--container-->
+        <div class="container">
+            <div class="top-header">
+                <div class="logo" style="left:100px">
+                    <a href="index.html">
+                        <img style="height:45px" src="images/logo.png" />
+                    </a>
+                </div>
+                <div class="menu">
+                    <ul class="nav" id="nav">
+                        <li>
+                            <a href="./index.html">首页</a>
+                        </li>
+                        <li>
+                            <a href="./me.html">我的卡片</a>
+                        </li>
+                        <li>
+                            <a href="./store.html">商店</a>
+                        </li>
+
+                        <li class="active">
+                            <a href="./plays.html">球星图鉴</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- <div class="clearfix"> </div> -->
+            </div>
+        </div>
+        <!--container-->
+    </div>
+    <div id="buttom">
+        <div id="container">
+            <div id="container1">
+            </div>
+            <div id="container2">
+                <div id="maincontainer">
+                </div>
+            </div>
+            <div id="container3">
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+<script type="text/javascript">
+    var data = awsomedata
+    teamlistdic = { "4704": 1, '4698': 3, '4481': 7, '4819': 6, '4748': 4, '4711': 5, '4694': 2, '4717': 8 }
+    xiyou = ["750","39433","85859","12994","124712","26502","167855","70996"]
+    var countryDict={};
+    var items =[];
+    for (card_id in data) {
+        var item = data[card_id]
+        if (!countryDict[item['teamname']])
+            countryDict[item['teamname']] = {}
+
+    
+        countryDict[item['teamname']][item['playername']] = { 'name': item['playername'], 'PlaceImgUrl': String(item['photo']),  'teamid': item['team_id'],'card_id':item['player_id'] }
+
+       
+
+    }
+    console.log(countryDict)
+    
+    for (var country in countryDict) {
+        //console.log(country)
+        var record = []
+        for (var name in countryDict[country]) {
+            record.push(countryDict[country][name])
+        }
+        items.push({ 'country': country, 'card': record })
+    }
+    var html = "";
+
+    var idbase = 1;
+    items.forEach(function (item) {
+       
+            html += "<div id='guojia1' class='guojia'><div class='card-items'><div class='country'>" + item.country + "<div class='guoqi' style='background-image: url(images/" + item.country + ".png);background-repeat: no-repeat; background-size: 40%;'></div></div>"
+
+        item['card'].forEach(function (d) {
+            //console.log(d.PlaceImgUrl)
+            console.log(d)
+
+            d.id = idbase;
+            idbase += 1;
+            if(xiyou.indexOf(d.card_id )>-1)
+                html += "<div  class='items'><div class='picture' style='background-image: url(" + d.PlaceImgUrl + ");background-repeat: no=repeat; background-size: 100%;'></div><div class='name'><svg style='width: 100%;height: 100%'><text x='55' y='15' fill='white' text-anchor='middle'>" + 
+                    d.name + "</text></svg></div><text text-anchor='middle'>稀有</text></div>"
+            else
+                html += "<div  class='items'><div class='picture' style='background-image: url(" + d.PlaceImgUrl + ");background-repeat: no=repeat; background-size: 100%;'></div><div class='name'><svg style='width: 100%;height: 100%'><text x='55' y='15' fill='white' text-anchor='middle'>" + 
+            d.name + "</text></svg></div></div>"
+        })
+        html += "</div></div>"
+    })
+    $('#maincontainer').html(html)
+
+</script>
+
+</html>
