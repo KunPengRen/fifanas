@@ -247,9 +247,10 @@
 
     var keyposition={"24": "2", "25": "3", "26": "4", "27": "5", "20": "9", "21": "10", "22": "11", "23": "1", "28": "6", "29": "7", "4": "4", "8": "8", "59": "4", "58": "3", "55": "11", "54": "10", "57": "2", "56": "1", "51": "7", "50": "6", "53": "9", "52": "8", "88": "11", "82": "5", "83": "6", "80": "3", "81": "4", "86": "9", "87": "10", "84": "7", "85": "8", "3": "3", "7": "7", "39": "6", "38": "5", "33": "11", "32": "10", "31": "9", "30": "8", "37": "4", "36": "3", "35": "2", "34": "1", "60": "5", "61": "6", "62": "7", "63": "8", "64": "9", "65": "10", "66": "11", "67": "1", "68": "2", "69": "3", "2": "2", "6": "6", "11": "11", "10": "10", "13": "2", "12": "1", "15": "4", "14": "3", "17": "6", "16": "5", "19": "8", "18": "7", "48": "4", "49": "5", "46": "2", "47": "3", "44": "11", "45": "1", "42": "9", "43": "10", "40": "7", "41": "8", "1": "1", "5": "5", "9": "9", "77": "11", "76": "10", "75": "9", "74": "8", "73": "7", "72": "6", "71": "5", "70": "4", "79": "2", "78": "1"}
     var data = awsomedata
+    teamlistdic = {"4704" : 1,'4698':3,'4481':7,'4819':6,'4748':4,'4711':5,'4694':2,'4717':8}
     "use strict";
 
-    var dappAddress = "n1qoNq95ME3P1PhMenUkQjigCQBbKA2531f";
+    var dappAddress = "n1ikVyaoedyYsVH8UiyboY9SFm51wCmoX57";
     var nebulas = require("nebulas"), Account = Account, neb = new nebulas.Neb();
     neb.setRequest(new nebulas.HttpRequest("https://testnet.nebulas.io"))
 
@@ -379,14 +380,16 @@
 
         $('.duijiang').click(function(d){
           var team_id = $(this).attr('team_id')
+          var team_id1= teamlistdic[team_id]
           var country =  $(this).attr('id')
           for(var item in countryDict[country]){
             console.log(item)
             console.log(keyposition[countryDict[country][item]['key']])
             duihuan[keyposition[countryDict[country][item]['key']]-1]=String(keyid[countryDict[country][item]['key']][0])
           }
-          duihuan.push(team_id)
+          duihuan.push(team_id1)
           duihuan = JSON.stringify(duihuan)
+          get_duihuan(duihuan);
           console.log(duihuan)
         })
 
@@ -413,8 +416,11 @@
 			}
     }
 
-    function get_user_player(){
-      //获取用户信息
+    function get_duihuan(callArgs){
+      var to = dappAddress;
+      var value = "0";
+      var callFunction = "conversion";
+      nebPay.call(to, value, callFunction, callArgs);
     }
     getWallectInfo();
     userlogin(1);   
