@@ -91,6 +91,22 @@
       /*top,url(images/card_profile_end.png) no-repeat bottom,*/
     }
 
+    #maincontainer{
+ 
+        top: 0px;
+        left: 20px;  
+        height:auto;
+       
+        margin-left: 20px;
+        margin-right: 20px;
+    
+        width: calc(100% - 40px);;
+
+        float: left;
+
+        /*background: red;*/
+        /*top,url(images/card_profile_end.png) no-repeat bottom,*/
+      }
     #guojia1 {
       height: auto;
       width: 100%;
@@ -257,6 +273,7 @@
 
       </div>
       <div id="container2">
+        <div id="maincontainer">
         <div v-for="item in items" class="items">
           <div class="picture" v-bind:style="{ 'background-image': 'url(' + item.PlaceImgUrl + ')','background-repeat':'no-repeat','background-size':'cover' }">
           </div>
@@ -280,6 +297,7 @@
 
           </div>
         </div>
+      </div>
       </div>
       <!-- <div id="card">
                 <div id="card-top">

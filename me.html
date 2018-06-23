@@ -84,11 +84,28 @@
         top: 80px;
         left: 0;  
         height:auto;
+        
         background:url(images/card_profile.png) repeat-y;
         background-size: 100%;
 
         width: 100%;
         z-index:100;
+        float: left;
+
+        /*background: red;*/
+        /*top,url(images/card_profile_end.png) no-repeat bottom,*/
+      }
+      #maincontainer{
+ 
+        top: 0px;
+        left: 20px;  
+        height:auto;
+        border-right:2px solid #F7E65E;
+        margin-left: 20px;
+        margin-right: 20px;
+    
+        width: calc(100% - 40px);;
+
         float: left;
 
         /*background: red;*/
@@ -102,6 +119,7 @@
      
       #container3{
         position: absolute;
+        bottom: 0px;
         width: 100%;
         float: left;
         left: 0px;  
@@ -112,7 +130,9 @@
       } 
       
       .country{
-        border:1px solid #F7E65E;
+        border-top:2px solid #F7E65E;
+        border-left:2px solid #F7E65E;
+        border-bottom: 1px solid #F7E65E;
         height:40px;
         width: 100%;
         cursor: pointer;
@@ -233,6 +253,8 @@
             <div id="container1">   
             </div>
             <div id="container2">
+              <div id="maincontainer">
+              </div>
             </div>
             <div id="container3">
             </div>
@@ -374,7 +396,7 @@
             })
             html+="</div></div>"
         })
-        $('#container2').html(html)
+        $('#maincontainer').html(html)
 
         var duihuan=['', '','','','', '','','','', '','']
 
