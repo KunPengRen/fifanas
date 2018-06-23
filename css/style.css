@@ -1,0 +1,65 @@
+/*.header{
+	background:#000;
+}*/
+
+/*.menu li.active a{
+	color:#F7E65E;
+	border:5px solid black;	
+} 
+.menu li.active a {
+	border-bottom:5px solid #ddd;
+	border-top:none; 
+	border-left:none;
+	border-right:none;
+}*/
+.logo{
+	float:left;
+	margin-top:1em;
+	margin-left: 4em;
+}
+.menu{
+	 float:left;
+	 margin-top:-10px;
+	 margin-right:10em;
+/*	 background: blue;*/
+}
+.menu li{
+	list-style:none;
+	display:inline-block;
+	margin: 1em 1em 2em;
+	padding:0px 1px;
+}
+ .menu li:first-child{
+   	margin-left:0;
+}
+.menu li a{
+	color:white;
+	text-decoration:none;
+	padding:0.3em 0.5em;
+	display:block;
+	text-transform:uppercase;
+	font-size:1.1em;
+	font-weight:600;
+	border-radius:5px;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	-o-border-radius:5px;
+	-ms-border-radius:5px;
+	border:2px solid #F7E65E;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+	transform: skew(-10deg);
+	background: linear-gradient(#F7E65E,#89540d60)
+}
+.menu li a:hover{
+	border:2px solid #A4AEAD;
+}
+#nav .current a {
+	
+   -webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+}

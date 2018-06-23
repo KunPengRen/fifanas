@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>World Cup 2018</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="css/style.css" rel='stylesheet' type='text/css' />
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="js/d3.v4.min.js"></script>
+    <script type="text/javascript" src="./dist/nebulas.js"></script>
+    <script type="text/javascript" src="./js/playdata.js"></script>
+
+    <script type="text/javascript" src="./dist/nebPay.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <style type="text/css">
+      body{  
+        background-image: url(images/background.jpg);  
+        background-repeat: repeat-y; 
+        background-size: 100%;  
+        color: white;
+        height: 200%
+
+      } 
+      /*li{
+        
+      } */
+      .active a{
+        border: 4px solid #F7E65E !important
+      }
+      #top{
+        position: absolute;
+        top:0;
+        left: 0px;
+        height: 80px;
+        width: 100%;
+       /* background: blue;*/
+      }
+      #buttom{
+        position: absolute;
+        top: 80px;
+        left: 0px;
+        height:calc(100% - 80px);
+        width: 100%;
+        /*background: red;*/
+      }
+      #container{
+        position: absolute;
+        top: 0px;
+        left: 5%;
+        height:100%;
+        width: 90%;
+
+        opacity: 0.8;
+        z-index:100;
+        /*background: linear-gradient(#F7E65E,#89540d60);
+        /*background: #F0D779;*/
+        /*opacity: 0.7;*/
+
+        
+        /*      */
+
+      }
+      #container1{
+        position: absolute;
+        top: 0px;
+        left: 0;
+        height:80px;
+        width: 100%;
+        background: url(images/card_profile_top.png) no-repeat;
+        background-size: 100%;
+        float: left;
+
+      }
+      #container2{
+        position: absolute;
+        top: 80px;
+        left: 0;  
+        height:auto;
+        background:url(images/card_profile.png) repeat-y;
+        background-size: 100%;
+
+        width: 100%;
+        z-index:100;
+        float: left;
+
+        /*background: red;*/
+        /*top,url(images/card_profile_end.png) no-repeat bottom,*/
+      }
+      .guojia{
+        height:auto;
+        width: 100%;
+        float: left;  
+      }
+     
+      #container3{
+        position: absolute;
+        width: 100%;
+        float: left;
+        left: 0px;  
+        height:40px;
+       /* background:url(images/card_profile_end.png) no-repeat bottom;*/
+        background-size: 100%;
+        
+      } 
+      
+      .country{
+        height:40px;
+        width: 100%;
+        cursor: pointer;
+        background:url(images/check.png) no-repeat bottom;
+        background-size: 7%;
+        
+        float: left;
+      }
+      .country-detail{
+        height:auto;
+        width: 100%;
+        float: left;
+      }
+
+      .card-items{
+        width: 100%;
+        height:auto;
+        float: left;
+      }
+      .items{
+        height:160px;
+        width: 110px;
+        /*display:inline*/
+        float: left;
+        border:1px solid #F7E65E;
+      }
+      .picture{
+        height:110px;
+        width: 110px;
+      }
+      .name{
+        height:20px;
+        width: 110px;
+        font-size: 8px;   
+        text-align:center; /*水平居中*/
+        line-height: 20px; /*行距设为与div高度一致*/
+      }
+      .button{
+        height:30px;
+        width: 110px;
+        background:url(images/sale.png) no-repeat bottom;
+        background-size: 70%;
+        cursor: pointer;
+      }
+
+      #card-price{
+        position: absolute;
+        top: 200px;
+        left: 0;
+        height:20px;
+        width: 100%;    
+        text-align:center; /*水平居中*/
+        line-height: 20px; /*行距设为与div高度一致*/
+        
+      }
+      
+      #card-bottom{
+        position: absolute;
+        top: 230px;
+        left: 0;
+        height:50px;
+        width: 100%;
+        background:url(images/btn.png) no-repeat bottom;
+        background-size: 80%;
+      }
+    </style>
+</head>
+<script>
+ 
+</script>
+<body>
+    <div id="top">
+        <!--container-->
+        <div class="container">
+            <div class="top-header">
+                <div class="logo">
+                    <a href="index.html"><img  style="height:45px" src="images/logo.jpg" /></a>
+                </div>
+                <div class="menu">
+                    <ul class="nav" id="nav">
+                        <li ><a href="./index.html">首页</a></li>
+                        <li class="active"><a href="./me.html">我的卡片</a></li>
+                        <li><a href="./store.html">商店</a></li>
+                    </ul>
+                    
+                </div>
+                <!-- <div class="clearfix"> </div> -->
+            </div>
+        </div>
+        <!--container-->
+    </div>
+    <div id="buttom">
+        <div id="container">
+            <div id="container1">
+              
+            </div>
+            <div id="container2">
+
+              <div id="app">
+                <ol>
+                  <li v-for="site in sites">
+                    {{ site.country }}
+                  </li>
+                  
+                </ol>
+              </div>
+
+              <div id="app1">
+                <ol>
+                  <li v-for="site in items">
+                    {{ site.country }}
+                  </li>
+                </ol>
+              </div>
+
+             <!--  <div id='guojia1' class="guojia">
+                <div class="card-items" v-for="record in items">
+                  <div class="country">
+                    {{ record.country }}
+                  </div>
+                  <div class="country-detail">
+                    <div v-for="item in record.card" class="items">
+                      <div class="picture" v-bind:style="{ 'background-image': 'url(' + item.PlaceImgUrl + ')','background-repeat':'no-repeat','background-size':'cover' }">
+                      </div>
+                      <div class="name">
+                        <svg style="width: 100%;height: 100%">
+                          <text x="55" y="15" fill="white" text-anchor="middle">{{ item.name }}</text>
+                          <text x="105" y="15" fill="white" text-anchor="end">X{{ item.number }}</text>
+                        </svg>
+                      </div>
+                      <div class="button">
+                      </div>
+                    </div>
+                  </div>
+              </div> -->
+
+              
+               
+
+              </div>
+              
+              <!-- <div id="card">
+                <div id="card-top">
+                </div>
+                <div id="card-price">
+                  0.173 NAS/张
+                </div>
+                <div id="card-bottom">
+                </div>
+              </div> -->
+            </div>
+            <div id="container3">
+              
+            </div>
+        </div>
+    </div>
+
+
+    
+</body>
+<script type="text/javascript">
+  console.log(awsomedata)
+    var data = awsomedata
+
+    console.log(data)
+    "use strict";
+    var dappAddress = "n1onEdGatH7aqqR1HhPGDiFw1A7ri7UYc4w";
+    var nebulas = require("nebulas"), Account = Account, neb = new nebulas.Neb();
+    neb.setRequest(new nebulas.HttpRequest("https://testnet.nebulas.io"))
+
+
+    var NebPay = require("nebpay");     //https://github.com/nebulasio/nebPay
+    var nebPay = new NebPay();
+    //本地钱包地址
+    var localAddress;
+    //用户卡片id列表
+    var user_cardids;
+    function getWallectInfo() {
+        window.postMessage({
+            "target": "contentscript",
+            "data": {},
+            "method": "getAccount",
+        }, "*");
+        window.addEventListener('message', function (e) {
+            if (e.data && e.data.data) {
+                if (e.data.data.account) {//这就是当前钱包中的地址
+                    localAddress = e.data.data.account
+                }
+            }
+        });
+    }
+    function userlogin(i){
+      //用户登录
+      var to = dappAddress;
+			var value = "0";
+			var callFunction = "user_login";
+      var callArgs ="["+"]";
+      if(i==1){
+        nebPay.simulateCall(to, value, callFunction, callArgs, {
+            listener: loginlisten
+          });
+        }
+      else{
+        nebPay.call(to, value, callFunction, callArgs);
+        
+      }
+        console.log("登录")
+
+    }
+    function get_user_cards(user_cardids){
+      
+
+    }
+    function loginlisten(resp){
+       result = resp.result
+			if (result === "\"first\"") {
+        alert("检测到用户第一次登录，系统赠送5张卡片")
+        userlogin(2)
+        
+			} else {
+				$('#tableList').show();
+        var resultObj = JSON.parse(result);
+        user_cardids = resultObj['card_list'].split('_');
+				
+			}
+    }
+    function get_user_player(){
+      //获取用户信息
+    }
+    getWallectInfo();
+    userlogin(1);
+   
+    
+    
+    var items=[{'country': '丹麦', 'card': []},{'country': '法国', 'card': []}]
+    data['4476'].forEach(function(d){
+      items[0]['card'].push({'name': d.playername, 'PlaceImgUrl': String(d.photo), 'number': 2})
+    })
+
+    // var items2=[{'country': '法国', 'card': []}]
+    data['4481'].forEach(function(d){
+      items[1]['card'].push({'name': d.playername, 'PlaceImgUrl': String(d.photo), 'number': 2})
+    })
+    var html="";
+    
+    var idbase = 1;
+   
+    items.forEach(function(item){
+        html+="<div id='guojia1' class='guojia'><div class='card-items'><div class='country'>"+item.country+"</div><div class='country-detail'>"
+        item['card'].forEach(function(d){
+          console.log(d.PlaceImgUrl)
+          d.id=idbase;
+          idbase+=1;
+          html+=  "<div  class='items'><div class='picture' style='background-image: url("+d.PlaceImgUrl+");background-repeat: no=repeat; background-size: 100%;'></div><div class='name'><svg style='width: 100%;height: 100%'><text x='55' y='15' fill='white' text-anchor='middle'>"+d.name+"</text><text x='105' y='15' fill='white' text-anchor='end'>X"+d.number+"</text></svg></div><div class='button' id="+d.id+" ></div></div>"
+        })
+        html+="</div></div>"
+    })
+   
+    $('#container2').html(html)
+    console.log(html)
+    
+
+    // console.log(items1)
+    // new Vue({
+    //   el: '#guojia1',
+    //   data: {
+    //     items1: items1
+    //   }
+    // })
+
+    // // console.log(items2)
+    // new Vue({
+    //   el: '#guojia2',
+    //   data: {
+    //     items2: items2
+    //   }
+    // })
+
+    // new Vue({
+    //   el: '#container2',
+    //   data: {
+    //     items: [
+    //       { country: 'Runoob1213' },
+    //       { country: 'Google' },
+    //       { country: 'Taobao' }
+    //     ]
+    //   }
+    // })
+
+    // new Vue({
+    //   el: '#guojia2',
+    //   data: {
+    //     items2: [
+    //       { country: 'Runoob' },
+    //       { country: 'Google' },
+    //       { country: 'Taobao' }
+    //     ]
+    //   }
+    // })
+
+
+     $(document).ready(function (){
+        $('.button').click(function(){
+            console.log('click chushou')
+            console.log($(this).attr("id"))
+
+            //alert(22)
+        })
+    });
+    // $(document).ready(function (){
+    //     $('.country').click(function(){
+    //         console.log('click duihuan')
+    //         alert(11)
+    //     })
+    // });
+
+    
+
+
+
+  
+</script>
+
+</html>
