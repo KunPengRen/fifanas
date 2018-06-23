@@ -277,6 +277,7 @@
             </svg>
           </div>
           <div class="button">
+
           </div>
         </div>
       </div>
@@ -299,15 +300,62 @@
 
 
 </body>
+
 <script type="text/javascript">
 
-  var data = awsomedata
-  console.log(data)
+  // $('#card-bottom').click(function(){
+  //   console.log('click chouka')
+  // })
+  var data = awsomedata;
+  "use strict";
+  var dappAddress = "n1qc8tL8rKLCuarrSEJAivUG3Z4kpp5xdWa";
+  var nebulas = require("nebulas"), Account = Account, neb = new nebulas.Neb();
+  neb.setRequest(new nebulas.HttpRequest("https://testnet.nebulas.io"))
 
-  var items = []
-  data['4476'].forEach(function (d) {
-    items.push({ 'name': d.playername, 'PlaceImgUrl': d.photo, 'number': 2, 'country': d.teamname, 'price': 2 })
-  })
+  var NebPay = require("nebpay");     //https://github.com/nebulasio/nebPay
+  var nebPay = new NebPay();
+  //本地钱包地址
+  var localAddress;
+  var card_price;
+  var items = [];
+  function foreach_sale_card() {
+    //
+    var to = dappAddress;
+    var value = "0";
+    var callFunction = "foreach_sale_card";
+    var callArgs = "[" + "]";
+
+    nebPay.simulateCall(to, value, callFunction, callArgs, {
+      listener: function (resp) {
+        let cards = resp.result.substring(1, resp.result.length - 1).split("_")
+        for (let i = 0; i < cards.length; i++) {
+          console.log(cards[i].toString())
+          let parts = cards[i].split("~")
+          let card_id = parts[0]
+          let card_data = parts[1]
+          let card_price = parts[2]
+          let more_data = card_data.split(",")
+          let card_type = more_data[0]
+          //let type_id = more_data[0]
+          //let type_id = more_data[0]
+          let team_id = more_data[2]
+          let team_player_id = more_data[3]
+          let status = more_data[4]
+          var item = awsomedata[card_type]
+          items.push({ 'name': item['playername'], 'PlaceImgUrl': String(item['photo']), 'country': item['teamname'], 'price': card_price })
+        }
+        console.log(items);
+        $('.button').click(function () {
+          console.log('click goumai');
+
+
+
+        })
+
+      }
+    });
+  }
+  foreach_sale_card()
 
   console.log(items)
   var example1 = new Vue({
@@ -316,13 +364,17 @@
       items: items
     }
   })
+  function buy_card(card_id, card_price) {
+    var to = dappAddress;
+    var value = String(card_price);
+    var callFunction = "get_sale_card";
+    var callArgs = "[\"" + cardid + "\"]";
+    nebPay.call(to, value, callFunction, callArgs);
 
+  }
   $(document).ready(function () {
-    $('.button').click(function () {
-      console.log('click goumai')
-    })
-  });
 
+  });
 
 
 

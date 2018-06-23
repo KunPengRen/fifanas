@@ -227,6 +227,7 @@
   console.log(awsomedata)
     var data = awsomedata
     "use strict";
+
     var dappAddress = "n1qc8tL8rKLCuarrSEJAivUG3Z4kpp5xdWa";
     var nebulas = require("nebulas"), Account = Account, neb = new nebulas.Neb();
     neb.setRequest(new nebulas.HttpRequest("https://testnet.nebulas.io"))
@@ -281,6 +282,7 @@
         
 			} else {
 				$('#tableList').show();
+
         user_cardids = result.split('_');
         console.log(user_cardids)
         var items=[]  
@@ -345,7 +347,7 @@
         
         $('#container2').html(html)
         console.log(html)
-        
+
 				
 			}
     }
@@ -394,7 +396,14 @@
     //     ]
     //   }
     // })
-
+      function sale_card(card_id,card_price){
+        var to = dappAddress;
+        var value = "0";
+        var callFunction = "sale_my_card";
+        var card_id = id;
+        var callArgs ="[\""+cardid+"\",\""+card_price+"\"]";
+        nebPay.call(to, value, callFunction, callArgs);
+      }
 
      $(document).ready(function (){
         $('.button').click(function(){
