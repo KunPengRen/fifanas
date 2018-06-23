@@ -292,7 +292,7 @@
           </div>
           <div class="price">
             <svg style="width: 100%;height: 100%">
-              <text x="55" y="15" fill="white" text-anchor="middle">{{ item.price }}NAS</text>
+              <text x="55" y="15" fill="white" text-anchor="middle">{{ item.card_price }} NAS</text>
 
             </svg>
           </div>
@@ -329,10 +329,10 @@
   // })
   var data = awsomedata;
   "use strict";
-  var dappAddress = "n1qoNq95ME3P1PhMenUkQjigCQBbKA2531f";
+  var dappAddress = "n1zAsr4qbFEYU27m6ABcwUAtM2TwD6sXQTN";
   var nebulas = require("nebulas"), Account = Account, neb = new nebulas.Neb();
-  neb.setRequest(new nebulas.HttpRequest("https://testnet.nebulas.io"))
-
+  //neb.setRequest(new nebulas.HttpRequest("https://testnet.nebulas.io"))
+  neb.setRequest(new nebulas.HttpRequest("https://mainnet.nebulas.io"))
   var NebPay = require("nebpay");     //https://github.com/nebulasio/nebPay
   var nebPay = new NebPay();
   //本地钱包地址
