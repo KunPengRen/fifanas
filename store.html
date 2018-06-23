@@ -277,6 +277,7 @@
             </svg>
           </div>
           <div class="button">
+            
           </div>
         </div>
       </div>
@@ -299,8 +300,60 @@
 
 
 </body>
+
 <script type="text/javascript">
 
+  // $('#card-bottom').click(function(){
+  //   console.log('click chouka')
+  // })
+  "use strict";
+  var dappAddress = "n1uUWagwRyAZQ2hxRr76PMioNHZGAW6R8RB";
+  var nebulas = require("nebulas"), Account = Account, neb = new nebulas.Neb();
+  neb.setRequest(new nebulas.HttpRequest("https://testnet.nebulas.io"))
+
+  var NebPay = require("nebpay");     //https://github.com/nebulasio/nebPay
+  var nebPay = new NebPay();
+  //本地钱包地址
+  var localAddress;
+  var card_price;
+
+  function foreach_sale_card(){
+    //
+      var to = dappAddress;
+			var value = "0";
+			var callFunction = "foreach_sale_card";
+      var callArgs ="["+"]";
+     
+        nebPay.simulateCall(to, value, callFunction, callArgs, {
+            listener:  function(resp){
+              let cards = resp.result.substring(1,resp.result.length-1).split("_")
+              for(let i = 0; i < cards.length; i++){
+                console.log(cards[i].toString())
+                let parts = cards[i].split("~")
+                let card_id = parts[0]
+                let card_data = parts[1]
+                let card_price = parts[2]
+                let more_data = card_data.split(",")
+                let card_type = more_data[0]
+                //let type_id = more_data[0]
+                //let type_id = more_data[0]
+                let team_id = more_data[2]
+                let team_player_id = more_data[3]
+                let status = more_data[4]
+
+              }
+              
+      }});
+  }
+  $(document).ready(function (){
+        $('.button').click(function(){
+            console.log('click goumai')
+            //console.log($(this).attr("id"))
+
+            //alert(22)
+        })
+    });
+/*
   var data = awsomedata
   console.log(data)
 
@@ -322,8 +375,7 @@
       console.log('click goumai')
     })
   });
-
-
+*/
 
 
 

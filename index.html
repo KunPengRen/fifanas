@@ -209,7 +209,7 @@
                 <div id="card-top">
                 </div>
                 <div id="card-price">
-                  0.173 NAS/张
+                
                 </div>
                 <!-- <div id="card-bottom">
                 </div> -->
@@ -245,7 +245,7 @@
   //   console.log('click chouka')
   // })
   "use strict";
-  var dappAddress = "n1kJYyF8uAUUJpkHNUcbErKBRk9V6yG76K3";
+  var dappAddress = "n1qc8tL8rKLCuarrSEJAivUG3Z4kpp5xdWa";
   var nebulas = require("nebulas"), Account = Account, neb = new nebulas.Neb();
   neb.setRequest(new nebulas.HttpRequest("https://testnet.nebulas.io"))
 
@@ -262,21 +262,49 @@
 			var callFunction = "get_common_card_price";
       var callArgs ="["+"]";
      
-        nebPay.simulateCall(to, value, callFunction, callArgs, {
+      nebPay.simulateCall(to, value, callFunction, callArgs, {
             listener:  function(resp){
-       result = resp.result;
-       card_price =parseFloat(result) ;
-       console(card_price)
+            var result = resp.result;
+            card_price =parseFloat(result);
+            $('#card-price').text(card_price+" NAS/张")
+            console.log(card_price)
       }});
-
-
   }
- 
+  get_card_price();
+  function userlogin(i){
+      //用户登录
+      var to = dappAddress;
+			var value = "0";
+			var callFunction = "user_login";
+      var callArgs ="["+"]";
+      if(i==1){
+        nebPay.simulateCall(to, value, callFunction, callArgs, {
+            listener: loginlisten
+          });
+        }
+      else{
+        nebPay.call(to, value, callFunction, callArgs);
+        
+      }
+        console.log("登录")
+
+    }
+    function loginlisten(resp){
+      var result = resp.result;
+			if (result === "\"first\"") {
+        alert("检测到用户第一次登录，系统赠送5张卡片");
+        userlogin(2);
+      }
+      else{
+       
+      }
+    }
+    userlogin(1);
   $('#card-bottom1').click(function(){
     console.log('1')
     var to = dappAddress;
     var value = String(card_price);
-    var callFunction = "get_common_card_price";
+    var callFunction = "get_common_card";
     var callArgs ="["+"]";
     nebPay.call(to, value, callFunction, callArgs);
 
@@ -286,7 +314,7 @@
     console.log('5')
     var to = dappAddress;
     var value = String(card_price*5);
-    var callFunction = "get_common_card_price";
+    var callFunction = "get_five_card";
     var callArgs ="["+"]";
     nebPay.call(to, value, callFunction, callArgs);
 
@@ -296,25 +324,12 @@
     console.log('10')
     var to = dappAddress;
     var value = String(card_price*10);
-    var callFunction = "get_common_card_price";
+    var callFunction = "get_ten_card";
     var callArgs ="["+"]";
     nebPay.call(to, value, callFunction, callArgs);
   })
 
-  // $('#card-price').text('2')
-
-
-
-  //$('#card-bottom1')
-  // var example1 = new Vue({
-  //   el: '#example-1',
-  //   data: {
-  //     items: [
-  //       { message: 'Foo' },
-  //       { message: 'Bar' }
-  //     ]
-  //   }
-  // })
+ 
 </script>
 
 </html>
