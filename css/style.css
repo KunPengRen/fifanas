@@ -8,7 +8,7 @@
         right: 100px;
         height: 80px;
       }
-      
+
 /*.menu li.active a{
 	color:#F7E65E;
 	border:5px solid black;	
@@ -33,7 +33,7 @@
 .menu li{
 	list-style:none;
 	display:inline-block;
-	margin: 1em 1em 2em;
+	margin: 2.5em 1em 2em;
 	padding:0px 1px;
 }
  .menu li:first-child{

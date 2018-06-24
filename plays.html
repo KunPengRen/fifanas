@@ -5,7 +5,7 @@
     <title>World Cup 2018</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="css/style.css" rel='stylesheet' type='text/css' />
-
+    <link href="css/intro.css" rel='stylesheet' type='text/css' />
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="js/d3.v4.min.js"></script>
     <script type="text/javascript" src="./dist/nebulas.js"></script>
@@ -62,7 +62,7 @@
             height: 100%;
             width: 90%;
 
-            opacity: 0.8;
+            opacity: 0.9;
             z-index: 100;
             /*background: linear-gradient(#F7E65E,#89540d60);
         /*background: #F0D779;*/
@@ -104,7 +104,8 @@
             top: 0px;
             left: 20px;
             height: auto;
-            border-right: 2px solid #F7E65E;
+            border-right: 2px solid grey;
+
             margin-left: 20px;
             margin-right: 20px;
 
@@ -136,9 +137,9 @@
         }
 
         .country {
-            border-top: 2px solid #F7E65E;
-            border-left: 2px solid #F7E65E;
-            border-bottom: 1px solid #F7E65E;
+            border-top: 2px solid grey;
+            border-left: 2px solid grey;
+            border-bottom: 1px solid grey;
             height: 40px;
             width: 100%;
             cursor: pointer;
@@ -197,13 +198,22 @@
             width: 110px;
             /*display:inline*/
             float: left;
-            border: 1px solid #F7E65E;
+            border: 1px solid grey ;
         }
+
 
         .picture {
             height: 110px;
             width: 110px;
+            text-align: center;
+            
         }
+
+
+
+
+
+
 
         .name {
             height: 20px;
@@ -253,6 +263,41 @@
 </script>
 
 <body>
+
+    <div class="modal fade show" id="helpModal" tabindex="-1" role="dialog" style="display: none;">
+    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">×</span>
+    </button>
+    </div>
+    <div class="modal-body">
+    <p>在PC上使用本应用需要安装
+    <a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet">WebExtensionWallet</a>插件。 在手机端使用本应用需要安装NAS官方的NAS nano手机APP钱包，在IOS和安卓应用市场搜索安装即可。</p>
+    <hr>
+    <p><strong>竞猜玩法说明：</strong></p>
+    <p>所有竞猜都记录在区块链上，可在<a target="_blank" href="https://explorer.nebulas.io/#/tx/7b7b1eb9fd3ab33eb66177736a4ece3ce3310090f5494d761b3f97ac6b147d95">合约地址</a>上查看。</p>
+    <p>每场比赛开赛前10分钟停止竞猜，点击每次竞猜下方红色按钮即可参与，默认的竞猜金额是0.1NAS，可自行修改。</p>
+    <p>若当然比赛仍可竞猜但按钮不可点击，说明您已经竞猜过该场次的结果。</p>
+    <p>按钮下方显示的NAS数量为总竞猜金额，下方的百分数表示当前选择的人数比例。</p>
+    <p>比赛结束后，扣除5%的手续费，剩余的所有竞猜金额按照获胜的用户的竞猜金额比例分配。</p>
+    <hr>
+    <p><strong>球队玩法说明：</strong></p>
+    <p>每个球队都是一个独一无二的NRC721代币，玩家对购买的球队拥有所有权，可在<a target="_blank" href="https://explorer.nebulas.io/#/tx/0deccbf3cced0025ab5b3c6e147f98952bca2bf1ff06811897c20b31cef8ff66">合约地址</a>上查看。</p>
+    <p>玩家购买球队后，下一个玩家必须以更高的价格才可以买入（2倍），早期进入的玩家将会享受不菲的红利。</p>
+    <p>球队每交易一次，卖家将会获得95%的收益（扣除5%的平台手续费）。</p>
+    <p>玩家购买球队可以坐等升值，也可以参与手续费分成，在每场比赛停止竞猜时（比赛开始前10分钟）会对当前球队持有者以及合约余额进行快照。</p><p>
+    </p><p>比赛结束后，获胜球队持有者会获得快照时的合约余额奖励，玩家购入的球队胜出场次越多则手续费收益也会越多。</p>
+    <p>整个世界杯结束之后，玩家参与竞猜时平台收取的手续费（5%）将会按照5:2:1的比例分配给前三甲的球队，平台留取2成作为自有盈利。</p>
+    <hr>
+    <p>如有其它疑问，欢迎添加官方微信 digua2011 咨询~</p>
+    </div>
+    </div>
+    </div>
+    </div>
+
+
     <div id="top">
         <div id='timeCount'>
 
@@ -262,7 +307,7 @@
             <div class="top-header">
                 <div class="logo" style="left:100px">
                     <a href="index.html">
-                        <img style="height:45px" src="images/logo.png" />
+                        <img style="height:60px" src="images/logo.png" />
                     </a>
                 </div>
                 <div class="menu">
@@ -280,6 +325,8 @@
                         <li class="active">
                             <a href="./plays.html">球星图鉴</a>
                         </li>
+
+                        <li><a class="nav-item nav-link" data-toggle="modal" id="open" data-target="#helpModal" href="javascript:;">玩法说明</a></li>
                     </ul>
 
                 </div>
@@ -305,6 +352,12 @@
 
 </body>
 <script type="text/javascript">
+
+    var cardWidth = ($("#container2").width()-44)/11
+
+    
+
+
     var data = awsomedata
     teamlistdic = { "4704": 1, '4698': 3, '4481': 7, '4819': 6, '4748': 4, '4711': 5, '4694': 2, '4717': 8 }
     xiyou = ["750","39433","85859","12994","124712","26502","167855","70996"]
@@ -340,7 +393,7 @@
 
         item['card'].forEach(function (d) {
             //console.log(d.PlaceImgUrl)
-            console.log(d)
+            //console.log(d)
 
             d.id = idbase;
             idbase += 1;
@@ -350,11 +403,34 @@
             else
                 html += "<div  class='items'><div class='picture' style='background-image: url(" + d.PlaceImgUrl + ");background-repeat: no=repeat; background-size: 100%;'></div><div class='name'><svg style='width: 100%;height: 100%'><text x='55' y='15' fill='white' text-anchor='middle'>" + 
             d.name + "</text></svg></div></div>"
+
+
+
         })
         html += "</div></div>"
+
+
+        $(document).ready(function () {
+          $('.items').css('width', cardWidth)
+          $('.picture').css('height', cardWidth)
+          $('.picture').css('width', cardWidth)
+
+          $('.name').css('width', cardWidth)
+
+          $('.button').css('width', cardWidth)
+
+          $('.picture').css('width', cardWidth)
+        });
     })
     $('#maincontainer').html(html)
 
+
+    $("#open").click(function(d){
+      $("#helpModal").css('display', 'block')
+    })
+    $('.close').click(function(d){
+      $("#helpModal").css('display', 'none')
+    })
 </script>
 
 </html>

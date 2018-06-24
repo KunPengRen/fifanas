@@ -1,3 +1,6 @@
+
+
+
 var c=0
   var t=0
  function timedCount()
