@@ -33,7 +33,7 @@
 .menu li{
 	list-style:none;
 	display:inline-block;
-	margin: 2.5em 1em 2em;
+	margin: 2em 1em 2em;
 	padding:0px 1px;
 }
  .menu li:first-child{
