@@ -432,10 +432,16 @@
         var idbase = 1;
         items.forEach(function(item){
             if(item['card'].length==11){
-              html+="<div id='guojia1' class='guojia'><div class='card-items'><div class='country'>"+item.country+"<div class='guoqi' style='background-image: url(images/"+item.country+".png);background-repeat: no-repeat; background-size: 40%;'></div><div class='duijiang' id="+item.country+" team_id="+item['card'][0].teamid+"></div></div><div class='country-detail'>"
+              html+="<div id='guojia1' class='guojia'><div class='card-items'><div class='country'>"+
+              item.country+"<div class='guoqi' style='background-image: url(images/"+
+              item.country+".png);background-repeat: no-repeat; background-size: 40%;'></div><div class='duijiang' id="+
+              item.country+" team_id="+item['card'][0].teamid+"></div></div><div class='country-detail'>"
             }
             else{
-              html+="<div id='guojia1' class='guojia'><div class='card-items'><div class='country'>"+item.country+"<div class='guoqi' style='background-image: url(images/"+item.country+".png);background-repeat: no-repeat; background-size: 40%;'></div><div class='duijiangmiss' id="+item.country+" team_id="+item['card'][0].teamid+"></div></div><div class='country-detail'>"
+              html+="<div id='guojia1' class='guojia'><div class='card-items'><div class='country'>"+
+              item.country+"<div class='guoqi' style='background-image: url(images/"+
+              item.country+".png);background-repeat: no-repeat; background-size: 40%;'></div><div class='duijiangmiss' id="+
+              item.country+" team_id="+item['card'][0].teamid+"></div></div><div class='country-detail'>"
             }
 
             item['card'].forEach(function(d){
@@ -444,9 +450,11 @@
 
               d.id=idbase;
               idbase+=1;
-              html+=  "<div  class='items'><div class='picture' style='background-image: url("+d.PlaceImgUrl+");background-repeat: no=repeat; background-size: 100%;'></div><div class='name'><svg style='width: 100%;height: 100%'><text x='55' y='15' fill='white' text-anchor='middle'>"+d.name+"</text><text x='105' y='15' fill='white' text-anchor='end'>X"+d.number+"</text></svg></div><div class='button' id="+d.key+" ></div></div>"
+              html+=  "<div  class='items'><div class='picture' style='background-image: url("+
+              d.PlaceImgUrl+");background-repeat: no=repeat; background-size: 100%;'></div><div class='name'><svg style='width: 100%;height: 100%'><text x='55' y='15' fill='white' text-anchor='middle'>"+
+              d.name+"</text><text x='105' y='15' fill='white' text-anchor='end'>X"+d.number+"</text></svg></div><div class='button' id="+d.key+" ></div></div>"
             })
-            html+="</div></div>"
+            //html+=" </div></div>"
 
             $(document).ready(function () {
               $('.items').css('width', cardWidth)
