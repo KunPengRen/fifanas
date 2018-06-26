@@ -346,6 +346,16 @@
           </div>
         </div>
       </div>
+      <div style="width:100% !important;height:850px;text-align:center;">
+          <div id="loading" style="margin-top:200px;">
+            <p>
+              <img src="images/loading.gif" width="100xp" height="100px" />
+              <br/>
+              <font style="height:30px;vartical-algin:center;padding-left:5px"> 正在加载区块链数据，请稍等......</font>
+            </p>
+          </div>
+
+        </div>
       </div>
       <!-- <div id="card">
                 <div id="card-top">
@@ -395,7 +405,20 @@
 
     nebPay.simulateCall(to, value, callFunction, callArgs, {
       listener: function (resp) {
+      
+        console.log(resp.result)
+
+        console.log("hello")
+        if(resp.result=="\"\""){
+          document.getElementById("loading").style.display="none";
+          alert("当前商店无卡片出售")
+        }
+        else if(resp.result=="null"){
+          location.reload()
+        }
+        else{
         let cards = resp.result.substring(1, resp.result.length - 1).split("_")
+        document.getElementById("loading").style.display="none";
         for (let i = 0; i < cards.length; i++) {
           console.log(cards[i].toString())
           let parts = cards[i].split("~")
@@ -439,7 +462,7 @@
           });
 
         });
-
+}
 
 
       }

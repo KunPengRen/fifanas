@@ -2,522 +2,563 @@
 <html>
 
 <head>
-    <title>World Cup 2018</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link href="css/style.css" rel='stylesheet' type='text/css' />
+  <title>World Cup 2018</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link href="css/style.css" rel='stylesheet' type='text/css' />
 
-    <link href="css/intro.css" rel='stylesheet' type='text/css' />
+  <link href="css/intro.css" rel='stylesheet' type='text/css' />
 
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
-    <script src="js/d3.v4.min.js"></script>
-    <script type="text/javascript" src="./dist/nebulas.js"></script>
-    <script type="text/javascript" src="./js/playdata.js"></script>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="js/d3.v4.min.js"></script>
+  <script type="text/javascript" src="./dist/nebulas.js"></script>
+  <script type="text/javascript" src="./js/playdata.js"></script>
 
-    <script type="text/javascript" src="./js/bootpopup.min.js"></script>
-    <script type="text/javascript" src="./js/time.js"></script>
-
-
+  <script type="text/javascript" src="./js/bootpopup.min.js"></script>
+  <script type="text/javascript" src="./js/time.js"></script>
 
 
-    <script type="text/javascript" src="./dist/nebPay.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
-    <style type="text/css">
-      body{  
-        background-image: url(images/background.jpg);  
-        background-repeat: repeat-y; 
-        background-size: 100%;  
-        color: white;
-        height: 200%
 
-      } 
-      /*li{
+  <script type="text/javascript" src="./dist/nebPay.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+  <style type="text/css">
+    body {
+      background-image: url(images/background.jpg);
+      background-repeat: repeat-y;
+      background-size: 100%;
+      color: white;
+      height: 200%
+    }
+
+    /*li{
         
       } */
-      .active a{
-        border: 4px solid #F7E65E !important
-      }
-      #top{
-        position: absolute;
-        top:0;
-        left: 0px;
-        height: 80px;
-        width: 100%;
-       /* background: blue;*/
-      }
-      #buttom{
-        position: absolute;
-        top: 80px;
-        left: 0px;
-        height:calc(100% - 80px);
-        width: 100%;
-        /*background: red;*/
-      }
-      #container{
-        position: absolute;
-        top: 0px;
-        left: 5%;
-        height:100%;
-        width: 90%;
 
-        opacity: 0.9;
-        z-index:100;
-        /*background: linear-gradient(#F7E65E,#89540d60);
+    .active a {
+      border: 4px solid #F7E65E !important
+    }
+
+    #top {
+      position: absolute;
+      top: 0;
+      left: 0px;
+      height: 80px;
+      width: 100%;
+      /* background: blue;*/
+    }
+
+    #buttom {
+      position: absolute;
+      top: 80px;
+      left: 0px;
+      height: calc(100% - 80px);
+      width: 100%;
+      /*background: red;*/
+    }
+
+    #container {
+      position: absolute;
+      top: 0px;
+      left: 5%;
+      height: 100%;
+      width: 90%;
+
+      opacity: 0.9;
+      z-index: 100;
+      /*background: linear-gradient(#F7E65E,#89540d60);
         /*background: #F0D779;*/
-        /*opacity: 0.7;*/
+      /*opacity: 0.7;*/
+      /*      */
+    }
 
-        
-        /*      */
+    #container1 {
+      position: absolute;
+      top: 0px;
+      left: 0;
+      height: 80px;
+      width: 100%;
+      background: url(images/card_profile_top.png) no-repeat;
+      background-size: 100%;
+      float: left;
 
-      }
-      #container1{
-        position: absolute;
-        top: 0px;
-        left: 0;
-        height:80px;
-        width: 100%;
-        background: url(images/card_profile_top.png) no-repeat;
-        background-size: 100%;
-        float: left;
+    }
 
-      }
-      #container2{
-        position: absolute;
-        top: 80px;
-        left: 0;  
-        height:auto;
-        
-        background:url(images/card_profile.png) repeat-y;
-        background-size: 100%;
+    #container2 {
+      position: absolute;
+      top: 80px;
+      left: 0;
+      height: auto;
 
-        width: 100%;
-        z-index:100;
-        float: left;
+      background: url(images/card_profile.png) repeat-y;
+      background-size: 100%;
 
-        /*background: red;*/
-        /*top,url(images/card_profile_end.png) no-repeat bottom,*/
-      }
-      #maincontainer{
- 
-        top: 0px;
-        left: 20px;  
-        height:auto;
-        border-right:2px solid grey;
-        margin-left: 20px;
-        margin-right: 20px;
-    
-        width: calc(100% - 40px);;
+      width: 100%;
+      z-index: 100;
+      float: left;
 
-        float: left;
+      /*background: red;*/
+      /*top,url(images/card_profile_end.png) no-repeat bottom,*/
+    }
 
-        /*background: red;*/
-        /*top,url(images/card_profile_end.png) no-repeat bottom,*/
-      }
-      .guojia{
-        height:auto;
-        width: 100%;
-        float: left;  
-      }
-     
-      #container3{
-        position: absolute;
-        bottom: 0px;
-        width: 100%;
-        float: left;
-        left: 0px;  
-        height:40px;
-       /* background:url(images/card_profile_end.png) no-repeat bottom;*/
-        background-size: 100%;
-        
-      } 
-      
-      .country{
-        border-top:2px solid grey;
-        border-left:2px solid grey;
-        border-bottom: 1px solid grey;
-        height:40px;
-        width: 100%;
-        cursor: pointer;
-        /*background:url(images/check.png) no-repeat bottom;
+    #maincontainer {
+
+      top: 0px;
+      left: 20px;
+      height: auto;
+      border-right: 2px solid grey;
+      margin-left: 20px;
+      margin-right: 20px;
+
+      width: calc(100% - 40px);
+      ;
+
+      float: left;
+
+      /*background: red;*/
+      /*top,url(images/card_profile_end.png) no-repeat bottom,*/
+    }
+
+    .guojia {
+      height: auto;
+      width: 100%;
+      float: left;
+    }
+
+    #container3 {
+      position: absolute;
+      bottom: 0px;
+      width: 100%;
+      float: left;
+      left: 0px;
+      height: 40px;
+      /* background:url(images/card_profile_end.png) no-repeat bottom;*/
+      background-size: 100%;
+
+    }
+
+    .country {
+      border-top: 2px solid grey;
+      border-left: 2px solid grey;
+      border-bottom: 1px solid grey;
+      height: 40px;
+      width: 100%;
+      cursor: pointer;
+      /*background:url(images/check.png) no-repeat bottom;
         background-size: 7%;*/
-        
-        float: left;
-      }
-      .guoqi{
-        left:0px;
-        height:100%;
-        width: 100px;
-        cursor: pointer;
-        
-        background-size: 70%;
-        float: left;
+      float: left;
+    }
 
-      }
-      .duijiang{
-        left:800px;
-        height:100%;
-        width: 100px;
-        cursor: pointer;
-        background:url(images/check.png) no-repeat bottom;
-        background-size: 70%;
-        float: right;
+    .guoqi {
+      left: 0px;
+      height: 100%;
+      width: 100px;
+      cursor: pointer;
 
-      }
+      background-size: 70%;
+      float: left;
 
-      .duijiangmiss{
-        left:800px;
-        height:100%;
-        width: 100px;
-        cursor: pointer;
-        background:url(images/checkmiss.png) no-repeat bottom;
-        background-size: 70%;
-        float: right;
+    }
 
-      }
+    .duijiang {
+      left: 800px;
+      height: 100%;
+      width: 100px;
+      cursor: pointer;
+      background: url(images/check.png) no-repeat bottom;
+      background-size: 70%;
+      float: right;
 
-      .country-detail{
-        height:auto;
-        width: 100%;
-        float: left;
-      }
+    }
 
-      .card-items{
-        width: 100%;
-        height:auto;
-        float: left;
-      }
-      .items{
-        height:170px;
-        width: 110px;
-        /*display:inline*/
-        float: left;
-        border:1px solid grey;
-      }
-      .picture{
-        height:110px;
-        width: 110px;
-      }
-      .name{
-        height:20px;
-        width: 110px;
-        font-size: 8px;   
-        text-align:center; /*水平居中*/
-        line-height: 20px; /*行距设为与div高度一致*/
-      }
-      .button{
-        height:30px;
-        width: 110px;
-        background:url(images/sale.png) no-repeat bottom;
-        background-size: 70%;
-        cursor: pointer;
-      }
+    .duijiangmiss {
+      left: 800px;
+      height: 100%;
+      width: 100px;
+      cursor: pointer;
+      background: url(images/checkmiss.png) no-repeat bottom;
+      background-size: 70%;
+      float: right;
+
+    }
+
+    .country-detail {
+      height: auto;
+      width: 100%;
+      float: left;
+    }
+
+    .card-items {
+      width: 100%;
+      height: auto;
+      float: left;
+    }
+
+    .items {
+      height: 170px;
+      width: 110px;
+      /*display:inline*/
+      float: left;
+      border: 1px solid grey;
+    }
+
+    .picture {
+      height: 110px;
+      width: 110px;
+    }
+
+    .name {
+      height: 20px;
+      width: 110px;
+      font-size: 8px;
+      text-align: center;
+      /*水平居中*/
+      line-height: 20px;
+      /*行距设为与div高度一致*/
+    }
+
+    .button {
+      height: 30px;
+      width: 110px;
+      background: url(images/sale.png) no-repeat bottom;
+      background-size: 70%;
+      cursor: pointer;
+    }
 
 
 
-      #card-price{
-        position: absolute;
-        top: 200px;
-        left: 0;
-        height:20px;
-        width: 100%;    
-        text-align:center; /*水平居中*/
-        line-height: 20px; /*行距设为与div高度一致*/
-        
-      }
-      
-      #card-bottom{
-        position: absolute;
-        top: 230px;
-        left: 0;
-        height:50px;
-        width: 100%;
-        background:url(images/btn.png) no-repeat bottom;
-        background-size: 80%;
-      }
-    </style>
+    #card-price {
+      position: absolute;
+      top: 200px;
+      left: 0;
+      height: 20px;
+      width: 100%;
+      text-align: center;
+      /*水平居中*/
+      line-height: 20px;
+      /*行距设为与div高度一致*/
+    }
+
+    #card-bottom {
+      position: absolute;
+      top: 230px;
+      left: 0;
+      height: 50px;
+      width: 100%;
+      background: url(images/btn.png) no-repeat bottom;
+      background-size: 80%;
+    }
+  </style>
 </head>
 <script>
- 
+
 </script>
+
 <body>
 
 
   <div class="modal fade show" id="helpModal" tabindex="-1" role="dialog" style="display: none;">
-  <div class="modal-dialog modal-lg" role="document">
-  <div class="modal-content">
-  <div class="modal-header">
-  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-  <span aria-hidden="true">×</span>
-  </button>
-  </div>
-  <div class="modal-body">
-    <p>在PC上使用本应用需要使用Chrome浏览器安装
-    <a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet">WebExtensionWallet</a>插件。 手机端暂不支持，正在完善中。</p>
-    <hr>
-    <p><strong>游戏玩法说明：</strong></p>
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>在PC上使用本应用需要使用Chrome浏览器安装
+            <a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet">WebExtensionWallet</a>插件。 手机端暂不支持，正在完善中。</p>
+          <hr>
+          <p>
+            <strong>游戏玩法说明：</strong>
+          </p>
 
-    <ul>
-      <li>所有玩家的球星卡片和交易都记录在区块链上，可在<a target="_blank" href="https://explorer.nebulas.io/#/tx/0c5fd8871c9d7466c0786691bbedbd36c53b2656f3c5a2f64ae994b0420596b9">合约详情</a>上查看。</li>
-      <li>本次共选出本届世界杯八个热门球队，每个球队11位球星，每个球队选择一个超级球星为稀有卡片，可在球星图鉴中查询。</li>
-      <li>玩家第一次登录系统时，免费赠送5张球星卡，每抽一张卡片消费0.05NAS，可以选择每次抽一张、五张、十张。</li>
-      <li>玩家所有的卡片，都展示在我的卡片中，当集齐一个球队的所有球星时，可以发起兑换，目前兑换奖金为2nas，该奖金会随着系统售卡总金额的增加而增加。</li>
-      <li>玩家可以把自己多余的卡片放到商店中出售，一旦选择出售卡片，不可以取消出售，商店卡片交易费为10%，自动从卖家收款中扣除。</li>
-    </ul>
-    
-    <hr>
-    <p><strong>星云足球说明：</strong></p>
-    <ul>
-      <li>所有玩家的球星卡片和交易都记录在区块链上，可在<a target="_blank" href="https://explorer.nebulas.io/#/tx/0c5fd8871c9d7466c0786691bbedbd36c53b2656f3c5a2f64ae994b0420596b9">合约详情</a>上查看。</li>
-      <li>星云足球是在校大学生区块链兴趣小组合作开发出的第一款区块链游戏，游戏顺应当前世界杯热门。</li>
-      <li>游戏初期玩法简单，玩家可以通过抽卡，然后卖卡或者兑奖收益，游戏采用基于星云链的区块链智能合约技术，保障每位玩家的数字资产的安全、可信。</li>
-      <li>后期游戏玩法将会更加丰富，玩家可以将自己抽取的球星卡，组建球队，与合约上的玩家进行比赛，获胜的玩家会获取奖励。</li>
-    </ul>
-    <hr>
-    <strong>星云足球玩家微信交流群（如果有任何疑问和建议，欢迎进群交流）：</strong>
-    <img style="width: 90px; left: 50px; border:2.5px solid darkred;" src="./images/weixin.jpeg" />
-    <p></p>
+          <ul>
+            <li>所有玩家的球星卡片和交易都记录在区块链上，可在
+              <a target="_blank" href="https://explorer.nebulas.io/#/tx/0c5fd8871c9d7466c0786691bbedbd36c53b2656f3c5a2f64ae994b0420596b9">合约详情</a>上查看。</li>
+            <li>本次共选出本届世界杯八个热门球队，每个球队11位球星，每个球队选择一个超级球星为稀有卡片，可在球星图鉴中查询。</li>
+            <li>玩家第一次登录系统时，免费赠送5张球星卡，每抽一张卡片消费0.05NAS，可以选择每次抽一张、五张、十张。</li>
+            <li>玩家所有的卡片，都展示在我的卡片中，当集齐一个球队的所有球星时，可以发起兑换，目前兑换奖金为2nas，该奖金会随着系统售卡总金额的增加而增加。</li>
+            <li>玩家可以把自己多余的卡片放到商店中出售，一旦选择出售卡片，不可以取消出售，商店卡片交易费为10%，自动从卖家收款中扣除。</li>
+          </ul>
+
+          <hr>
+          <p>
+            <strong>星云足球说明：</strong>
+          </p>
+          <ul>
+            <li>所有玩家的球星卡片和交易都记录在区块链上，可在
+              <a target="_blank" href="https://explorer.nebulas.io/#/tx/0c5fd8871c9d7466c0786691bbedbd36c53b2656f3c5a2f64ae994b0420596b9">合约详情</a>上查看。</li>
+            <li>星云足球是在校大学生区块链兴趣小组合作开发出的第一款区块链游戏，游戏顺应当前世界杯热门。</li>
+            <li>游戏初期玩法简单，玩家可以通过抽卡，然后卖卡或者兑奖收益，游戏采用基于星云链的区块链智能合约技术，保障每位玩家的数字资产的安全、可信。</li>
+            <li>后期游戏玩法将会更加丰富，玩家可以将自己抽取的球星卡，组建球队，与合约上的玩家进行比赛，获胜的玩家会获取奖励。</li>
+          </ul>
+          <hr>
+          <strong>星云足球玩家微信交流群（如果有任何疑问和建议，欢迎进群交流）：</strong>
+          <img style="width: 90px; left: 50px; border:2.5px solid darkred;" src="./images/weixin.jpeg" />
+          <p></p>
+        </div>
+      </div>
     </div>
   </div>
-  </div>
-  </div>
 
 
 
-    <div id="top">
-      <div id='timeCount'>
-         
-        </div>
-        <!--container-->
-        <div class="container">
-            <div class="top-header">
-                <div class="logo" style="left:100px">
-                    <a href="index.html"><img  style="height:60px" src="images/logo.png" /></a>
-                </div>
-                <div class="menu">
-                    <ul class="nav" id="nav">
-                        <li ><a href="./index.html">首页</a></li>
-                        <li class="active"><a href="./me.html">我的卡片</a></li>
-                        <li><a href="./store.html">商店</a></li>
-                         <li><a href="./plays.html">球星图鉴</a></li>
+  <div id="top">
+    <div id='timeCount'>
 
-                          <li><a class="nav-item nav-link" data-toggle="modal" id="open" data-target="#helpModal" href="javascript:;">玩法说明</a></li>
-                    </ul>
-                    
-                </div>
-                <!-- <div class="clearfix"> </div> -->
-            </div>
-        </div>
-       
-        <!--container-->
     </div>
-    <div id="buttom">
-        <div id="container">
-            <div id="container1">   
-            </div>
-            <div id="container2">
-              <div id="maincontainer">
-              </div>
-              <div style="width:100% !important;height:850px;text-align:center;">  
-                  <div id="loading" style="margin-top:200px;">  
-                      <p>  
-                          <img src="images/loading.gif" width="100xp" height="100px" /><br/>  
-                          <font style="height:30px;vartical-algin:center;padding-left:5px"> 正在加载区块链数据，请稍等......</font>  
-                      </p>  
-                  </div>  
-
-              </div>  
-            </div>
-            <div id="container3">
-            </div>
+    <!--container-->
+    <div class="container">
+      <div class="top-header">
+        <div class="logo" style="left:100px">
+          <a href="index.html">
+            <img style="height:60px" src="images/logo.png" />
+          </a>
         </div>
+        <div class="menu">
+          <ul class="nav" id="nav">
+            <li>
+              <a href="./index.html">首页</a>
+            </li>
+            <li class="active">
+              <a href="./me.html">我的卡片</a>
+            </li>
+            <li>
+              <a href="./store.html">商店</a>
+            </li>
+            <li>
+              <a href="./plays.html">球星图鉴</a>
+            </li>
+
+            <li>
+              <a class="nav-item nav-link" data-toggle="modal" id="open" data-target="#helpModal" href="javascript:;">玩法说明</a>
+            </li>
+          </ul>
+
+        </div>
+        <!-- <div class="clearfix"> </div> -->
+      </div>
     </div>
 
+    <!--container-->
+  </div>
+  <div id="buttom">
+    <div id="container">
+      <div id="container1">
+      </div>
+      <div id="container2">
+        <div id="maincontainer">
+        </div>
+        <div style="width:100% !important;height:850px;text-align:center;">
+          <div id="loading" style="margin-top:200px;">
+            <p>
+              <img src="images/loading.gif" width="100xp" height="100px" />
+              <br/>
+              <font style="height:30px;vartical-algin:center;padding-left:5px"> 正在加载区块链数据，请稍等......</font>
+            </p>
+          </div>
 
-    
+        </div>
+      </div>
+      <div id="container3">
+      </div>
+    </div>
+  </div>
+
+
+
 </body>
 <script type="text/javascript">
-    //console.log(awsomedata)
+  //console.log(awsomedata)
 
-    if($("body").width()<500){
-      $('.logo img').css("height", 40)
-      $(".menu li").css("margin", "20px 0px 0px")
-    }
-
-    
+  if ($("body").width() < 500) {
+    $('.logo img').css("height", 40)
+    $(".menu li").css("margin", "20px 0px 0px")
+  }
 
 
-    var cardWidth = ($("#container2").width()-44)/11
 
-    var keyposition={"24": "2", "25": "3", "26": "4", "27": "5", "20": "9", "21": "10", "22": "11", "23": "1", "28": "6", "29": "7", "4": "4", "8": "8", "59": "4", "58": "3", "55": "11", "54": "10", "57": "2", "56": "1", "51": "7", "50": "6", "53": "9", "52": "8", "88": "11", "82": "5", "83": "6", "80": "3", "81": "4", "86": "9", "87": "10", "84": "7", "85": "8", "3": "3", "7": "7", "39": "6", "38": "5", "33": "11", "32": "10", "31": "9", "30": "8", "37": "4", "36": "3", "35": "2", "34": "1", "60": "5", "61": "6", "62": "7", "63": "8", "64": "9", "65": "10", "66": "11", "67": "1", "68": "2", "69": "3", "2": "2", "6": "6", "11": "11", "10": "10", "13": "2", "12": "1", "15": "4", "14": "3", "17": "6", "16": "5", "19": "8", "18": "7", "48": "4", "49": "5", "46": "2", "47": "3", "44": "11", "45": "1", "42": "9", "43": "10", "40": "7", "41": "8", "1": "1", "5": "5", "9": "9", "77": "11", "76": "10", "75": "9", "74": "8", "73": "7", "72": "6", "71": "5", "70": "4", "79": "2", "78": "1"}
-    var data = awsomedata
-    teamlistdic = {"4704" : 1,'4698':3,'4481':7,'4819':6,'4748':4,'4711':5,'4694':2,'4717':8}
-    "use strict";
-    //测试网
-    //var dappAddress ="n1ikVyaoedyYsVH8UiyboY9SFm51wCmoX57"
-    var dappAddress = "n1nEMjnn8r5N2ctsPAHD4RWs4AkksezqVkT";
-    var nebulas = require("nebulas"), Account = Account, neb = new nebulas.Neb();
-    //neb.setRequest(new nebulas.HttpRequest("https://testnet.nebulas.io"))
-    neb.setRequest(new nebulas.HttpRequest("https://mainnet.nebulas.io"))
 
-    var NebPay = require("nebpay");     //https://github.com/nebulasio/nebPay
-    var nebPay = new NebPay();
-    //本地钱包地址
-    var localAddress;
-    //用户卡片id列表
-    var user_cardids;
-    function getWallectInfo() {
-        window.postMessage({
-            "target": "contentscript",
-            "data": {},
-            "method": "getAccount",
-        }, "*");
-        window.addEventListener('message', function (e) {
-            if (e.data && e.data.data) {
-                if (e.data.data.account) {//这就是当前钱包中的地址
-                    localAddress = e.data.data.account
-                }
-            }
-        });
-    }
-    function userlogin(i){
-      //用户登录
-      var to = dappAddress;
-			var value = "0";
-			var callFunction = "user_login";
-      var callArgs ="["+"]";
-      if(i==1){
-        nebPay.simulateCall(to, value, callFunction, callArgs, {
-            listener: loginlisten
-          });
+  var cardWidth = ($("#container2").width() - 44) / 11
+
+  var keyposition = { "24": "2", "25": "3", "26": "4", "27": "5", "20": "9", "21": "10", "22": "11", "23": "1", "28": "6", "29": "7", "4": "4", "8": "8", "59": "4", "58": "3", "55": "11", "54": "10", "57": "2", "56": "1", "51": "7", "50": "6", "53": "9", "52": "8", "88": "11", "82": "5", "83": "6", "80": "3", "81": "4", "86": "9", "87": "10", "84": "7", "85": "8", "3": "3", "7": "7", "39": "6", "38": "5", "33": "11", "32": "10", "31": "9", "30": "8", "37": "4", "36": "3", "35": "2", "34": "1", "60": "5", "61": "6", "62": "7", "63": "8", "64": "9", "65": "10", "66": "11", "67": "1", "68": "2", "69": "3", "2": "2", "6": "6", "11": "11", "10": "10", "13": "2", "12": "1", "15": "4", "14": "3", "17": "6", "16": "5", "19": "8", "18": "7", "48": "4", "49": "5", "46": "2", "47": "3", "44": "11", "45": "1", "42": "9", "43": "10", "40": "7", "41": "8", "1": "1", "5": "5", "9": "9", "77": "11", "76": "10", "75": "9", "74": "8", "73": "7", "72": "6", "71": "5", "70": "4", "79": "2", "78": "1" }
+  var data = awsomedata
+  teamlistdic = { "4704": 1, '4698': 3, '4481': 7, '4819': 6, '4748': 4, '4711': 5, '4694': 2, '4717': 8 }
+  "use strict";
+  //测试网
+  //var dappAddress ="n1ikVyaoedyYsVH8UiyboY9SFm51wCmoX57"
+  var dappAddress = "n1nEMjnn8r5N2ctsPAHD4RWs4AkksezqVkT";
+  var nebulas = require("nebulas"), Account = Account, neb = new nebulas.Neb();
+  //neb.setRequest(new nebulas.HttpRequest("https://testnet.nebulas.io"))
+  neb.setRequest(new nebulas.HttpRequest("https://mainnet.nebulas.io"))
+
+  var NebPay = require("nebpay");     //https://github.com/nebulasio/nebPay
+  var nebPay = new NebPay();
+  //本地钱包地址
+  var localAddress;
+  //用户卡片id列表
+  var user_cardids;
+  function getWallectInfo() {
+    window.postMessage({
+      "target": "contentscript",
+      "data": {},
+      "method": "getAccount",
+    }, "*");
+    window.addEventListener('message', function (e) {
+      if (e.data && e.data.data) {
+        if (e.data.data.account) {//这就是当前钱包中的地址
+          localAddress = e.data.data.account
         }
-      else{
-        nebPay.call(to, value, callFunction, callArgs);
-        
       }
-        console.log("登录")
+    });
+  }
+  function userlogin(i) {
+    //用户登录
+    var to = dappAddress;
+    var value = "0";
+    var callFunction = "user_login";
+    var callArgs = "[" + "]";
+    if (i == 1) {
+      nebPay.simulateCall(to, value, callFunction, callArgs, {
+        listener: loginlisten
+      });
+    }
+    else {
+      nebPay.call(to, value, callFunction, callArgs);
 
     }
-    function get_user_cards(user_cardids){
-      
-    }
-    function loginlisten(resp){
-       result = resp.result
-			if (result === "\"first\"") {
-        alert("检测到用户第一次登录，系统赠送5张卡片")
-        $("#helpModal").css('display', 'block')
-        userlogin(2)
-        
-			} else {
-				$('#tableList').show();
-       
+    console.log("登录")
 
-        user_cardids = result.split('_');
+  }
+  function get_user_cards(user_cardids) {
+
+  }
+  function loginlisten(resp) {
+    result = resp.result
+    if (result === "\"first\"") {
+      alert("检测到用户第一次登录，系统赠送5张卡片")
+      $("#helpModal").css('display', 'block')
+      userlogin(2)
+
+    } else {
+      $('#tableList').show();
+
+
+      user_cardids = result.split('_');
+      console.log("hello")
+      if (user_cardids[0]=="" || user_cardids[0]=="null") {
+        console.log("null")
+        location.reload();
+      }
+      else {
+        document.getElementById("loading").style.display="none";
         console.log(user_cardids)
-        var items=[]  
-        var countryDict={}
+        var items = []
+        var countryDict = {}
 
-        var key=[]
-        var id= []
-        var keyid={} 
-        user_cardids.forEach(function(d, i){
+        var key = []
+        var id = []
+        var keyid = {}
+        user_cardids.forEach(function (d, i) {
           //console.log(i)
-          d=parseInt(d.replace('"', ''))
+          d = parseInt(d.replace('"', ''))
           //console.log(d)
-          if(i%2==0){
-            if(d){
-              var item=awsomedata[d]
-              if(!countryDict[item['teamname']])
-                countryDict[item['teamname']]={}
+          if (i % 2 == 0) {
+            if (d) {
+              var item = awsomedata[d]
+              if (!countryDict[item['teamname']])
+                countryDict[item['teamname']] = {}
 
-              if(!countryDict[item['teamname']][item['playername']])
-                countryDict[item['teamname']][item['playername']]={'name': item['playername'], 'PlaceImgUrl': String(item['photo']), 'number': 0, 'key': d, 'teamid': item['team_id']}
+              if (!countryDict[item['teamname']][item['playername']])
+                countryDict[item['teamname']][item['playername']] = { 'name': item['playername'], 'PlaceImgUrl': String(item['photo']), 'number': 0, 'key': d, 'teamid': item['team_id'] }
 
-              countryDict[item['teamname']][item['playername']]['number']+=1
+              countryDict[item['teamname']][item['playername']]['number'] += 1
             }
             key.push(d)
           }
-          else{
+          else {
             id.push(d)
           }
         })
 
-        for(var i=0;i<key.length;i++){
-          if(!keyid[key[i]]) keyid[key[i]]=[]
+        for (var i = 0; i < key.length; i++) {
+          if (!keyid[key[i]]) keyid[key[i]] = []
 
           keyid[key[i]].push(id[i]);
         }
 
         console.log(keyid)
 
-        items=[]
+        items = []
         console.log(countryDict)
-        for(var country in countryDict){
+        for (var country in countryDict) {
           //console.log(country)
-          var record=[]
-          for(var name in countryDict[country]){
+          var record = []
+          for (var name in countryDict[country]) {
             record.push(countryDict[country][name])
           }
-          items.push({'country': country, 'card': record})
+          items.push({ 'country': country, 'card': record })
         }
-        var html="";
-        
+        var html = "";
+
         var idbase = 1;
-        items.forEach(function(item){
-            if(item['card'].length==11){
-              html+="<div id='guojia1' class='guojia'><div class='card-items'><div class='country'>"+
-              item.country+"<div class='guoqi' style='background-image: url(images/"+
-              item.country+".png);background-repeat: no-repeat; background-size: 40%;'></div><div class='duijiang' id="+
-              item.country+" team_id="+item['card'][0].teamid+"></div></div><div class='country-detail'>"
-            }
-            else{
-              html+="<div id='guojia1' class='guojia'><div class='card-items'><div class='country'>"+
-              item.country+"<div class='guoqi' style='background-image: url(images/"+
-              item.country+".png);background-repeat: no-repeat; background-size: 40%;'></div><div class='duijiangmiss' id="+
-              item.country+" team_id="+item['card'][0].teamid+"></div></div><div class='country-detail'>"
-            }
+        items.forEach(function (item) {
+          if (item['card'].length == 11) {
+            html += "<div id='guojia1' class='guojia'><div class='card-items'><div class='country'>" +
+              item.country + "<div class='guoqi' style='background-image: url(images/" +
+              item.country + ".png);background-repeat: no-repeat; background-size: 40%;'></div><div class='duijiang' id=" +
+              item.country + " team_id=" + item['card'][0].teamid + "></div></div><div class='country-detail'>"
+          }
+          else {
+            html += "<div id='guojia1' class='guojia'><div class='card-items'><div class='country'>" +
+              item.country + "<div class='guoqi' style='background-image: url(images/" +
+              item.country + ".png);background-repeat: no-repeat; background-size: 40%;'></div><div class='duijiangmiss' id=" +
+              item.country + " team_id=" + item['card'][0].teamid + "></div></div><div class='country-detail'>"
+          }
 
-            item['card'].forEach(function(d){
-              //console.log(d.PlaceImgUrl)
-              console.log(d)
+          item['card'].forEach(function (d) {
+            //console.log(d.PlaceImgUrl)
+            console.log(d)
 
-              d.id=idbase;
-              idbase+=1;
-              html+=  "<div  class='items'><div class='picture' style='background-image: url("+
-              d.PlaceImgUrl+");background-repeat: no=repeat; background-size: 100%;'></div><div class='name'><svg style='width: 100%;height: 100%'><text x='55' y='15' fill='white' text-anchor='middle'>"+
-              d.name+"</text><text x='105' y='15' fill='white' text-anchor='end'>X"+d.number+"</text></svg></div><div class='button' id="+d.key+" ></div></div>"
-            })
-            html+=" </div></div></div>"
-            
+            d.id = idbase;
+            idbase += 1;
+            html += "<div  class='items'><div class='picture' style='background-image: url(" +
+              d.PlaceImgUrl + ");background-repeat: no=repeat; background-size: 100%;'></div><div class='name'><svg style='width: 100%;height: 100%'><text x='55' y='15' fill='white' text-anchor='middle'>" +
+              d.name + "</text><text x='105' y='15' fill='white' text-anchor='end'>X" + d.number + "</text></svg></div><div class='button' id=" + d.key + " ></div></div>"
+          })
+          html += " </div></div></div>"
 
-            $(document).ready(function () {
-              $('.items').css('width', cardWidth)
-              $('.items').css('height', 50+cardWidth)
-              $('.picture').css('height', cardWidth)
-              $('.picture').css('width', cardWidth)
-              $('.name').css('width', cardWidth)
-              $('.button').css('width', cardWidth)
-              $('.picture').css('width', cardWidth)
-              $('svg > text:nth-child(1)').attr('x', cardWidth/2)
-              $('svg > text:nth-child(2)').attr('x', cardWidth-5)
-            });
+
+          $(document).ready(function () {
+            $('.items').css('width', cardWidth)
+            $('.items').css('height', 50 + cardWidth)
+            $('.picture').css('height', cardWidth)
+            $('.picture').css('width', cardWidth)
+            $('.name').css('width', cardWidth)
+            $('.button').css('width', cardWidth)
+            $('.picture').css('width', cardWidth)
+            $('svg > text:nth-child(1)').attr('x', cardWidth / 2)
+            $('svg > text:nth-child(2)').attr('x', cardWidth - 5)
+          });
         })
         $('#maincontainer').html(html)
 
-        var duihuan=['', '','','','', '','','','', '','']
+        var duihuan = ['', '', '', '', '', '', '', '', '', '', '']
 
-        $('.duijiang').click(function(d){
+        $('.duijiang').click(function (d) {
           var team_id = $(this).attr('team_id')
-          var team_id1= teamlistdic[team_id]
-          var country =  $(this).attr('id')
-          for(var item in countryDict[country]){
+          var team_id1 = teamlistdic[team_id]
+          var country = $(this).attr('id')
+          for (var item in countryDict[country]) {
             console.log(item)
             console.log(keyposition[countryDict[country][item]['key']])
-            duihuan[keyposition[countryDict[country][item]['key']]-1]=String(keyid[countryDict[country][item]['key']][0])
+            duihuan[keyposition[countryDict[country][item]['key']] - 1] = String(keyid[countryDict[country][item]['key']][0])
           }
           duihuan.push(team_id1)
           duihuan = JSON.stringify(duihuan)
           get_duihuan(duihuan);
-          
+
           console.log(duihuan)
         })
 
@@ -525,7 +566,7 @@
 
         // var counter = 10; var timerId;
 
-        
+
 
         // function ShowAlert() {
         //     if (counter != 0) {
@@ -536,78 +577,81 @@
         //         clearInterval(timerId);
         //     }
         // }
-        
+
         // timerId = setInterval("ShowAlert()", 1000);
 
 
-        $('.button').click(function(d){
-          var price=prompt("请输入卖出价格")
+        $('.button').click(function (d) {
+          var price = prompt("请输入卖出价格")
           var id = $(this).attr('id')
           //$('this').attr('id')
-          while(true){
-            if(price==null){
+          while (true) {
+            if (price == null) {
               break;
             }
-            else if(isNaN(parseFloat(price))){
-              price=prompt("卖出价格格式不合法， 请重新输入价格")
+            else if (isNaN(parseFloat(price))) {
+              price = prompt("卖出价格格式不合法， 请重新输入价格")
             }
-            else{
+            else {
               sale_card(keyid[id][0], price)
               break
             }
           }
         })
-				
-			}
-    }
 
-    function get_duihuan(callArgs){
-      var to = dappAddress;
-      var value = "0";
-      var callFunction = "conversion";
-      nebPay.call(to, value, callFunction, callArgs,{
-      listener:function(){
+      }
+
+    }
+  }
+
+
+  function get_duihuan(callArgs) {
+    var to = dappAddress;
+    var value = "0";
+    var callFunction = "conversion";
+    nebPay.call(to, value, callFunction, callArgs, {
+      listener: function () {
         alert("正在进行区块打包交易,请耐心等待20秒后自动跳转到刷新");
-      setTimeout(function(){
-          
-          self.location="me.html";
-        },20000)
+        setTimeout(function () {
+
+          self.location = "me.html";
+        }, 20000)
       }
     });
-    }
-    getWallectInfo();
-    userlogin(1);   
-    var countrys = [];
-    var card
+  }
+  getWallectInfo();
+  userlogin(1);
+  var countrys = [];
+  var card
 
-    
-    function sale_card(card_id,card_price){
-      var to = dappAddress;
-      var value = "0";
-      var callFunction = "sale_my_card";
-      var callArgs ="[\""+card_id+"\",\""+card_price+"\"]";
-      nebPay.call(to, value, callFunction, callArgs,{
-      listener:function(){
+
+  function sale_card(card_id, card_price) {
+    var to = dappAddress;
+    var value = "0";
+    var callFunction = "sale_my_card";
+    var callArgs = "[\"" + card_id + "\",\"" + card_price + "\"]";
+    nebPay.call(to, value, callFunction, callArgs, {
+      listener: function () {
         alert("正在进行区块打包交易,请耐心等待20秒后自动刷新");
-      setTimeout(function(){
-          
-          self.location="me.html";
-        },20000)
+        setTimeout(function () {
+
+          self.location = "me.html";
+        }, 20000)
       }
     });
-    
-    }
 
-    $("#open").click(function(d){
-      $("#helpModal").css('display', 'block')
-    })
-    $('.close').click(function(d){
-      $("#helpModal").css('display', 'none')
-    })
+  }
 
-    
-    $(document).ready(function () {
-    if($("body").width()<1100){
+  $("#open").click(function (d) {
+    $("#helpModal").css('display', 'block')
+  })
+  $('.close').click(function (d) {
+    $("#helpModal").css('display', 'none')
+  })
+
+
+  $(document).ready(function () {
+    if ($("body").width() < 1100) {
       $('.logo img').css("height", 40)
       $(".menu li").css("margin", "0px 0px 0px")
       $(".container").css('padding-top', '1em')
@@ -617,7 +661,7 @@
   });
 
 
-  
+
 </script>
 
 </html>
