@@ -22,12 +22,12 @@
 .logo{
 	float:left;
 	margin-top:1em;
-	margin-left: 4em;
+	
 }
 .menu{
 	 float:left;
 	 margin-top:-10px;
-	 margin-right:10em;
+
 /*	 background: blue;*/
 }
 .menu li{
