@@ -350,6 +350,7 @@
       var result = resp.result;
 			if (result === "\"first\"") {
         alert("检测到用户第一次登录，系统赠送5张卡片");
+        $("#helpModal").css('display', 'block')
         userlogin(2);
       }
       else{
