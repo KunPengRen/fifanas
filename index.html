@@ -423,7 +423,22 @@
   $('.close').click(function(d){
     $("#helpModal").css('display', 'none')
   })
- 
+  
+
+  $(document).ready(function () {
+    if($("body").width()<1100){
+      $('.logo img').css("height", 40)
+      $(".menu li").css("margin", "0px 0px 0px")
+      $(".container").css('padding-top', '1em')
+      $('.menu').css('float', 'none')
+      $(".menu").css('padding-top', '1em')
+    }
+  });
+
+
+  
+
+
 </script>
 
 </html>
